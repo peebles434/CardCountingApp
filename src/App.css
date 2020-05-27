@@ -1,3 +1,26 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: url("https://www.solitaire-web-app.com/solitaire/images/backgrounds/1920x1200/green_felt.jpg")
+    no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.cardWrapper {
+  height: 75vh;
+}
+
+.playingCard {
+  transform: scale(0.5);
+}
+
 .App {
   text-align: center;
 }
