@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
+import { AnswerInputForm } from "./AnswerInputForm";
 
 export const CardCounter = (props) => {
   let [runningCount, setRunningCount] = useState(0);
@@ -16,6 +17,7 @@ export const CardCounter = (props) => {
 
   return (
     <div>
+      <AnswerInputForm runningCount={runningCount} />
       <h2>Running Count: {runningCount}</h2>
       <h2>Number of Cards: {props.count}</h2>
     </div>

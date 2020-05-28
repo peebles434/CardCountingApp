@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 
-export const UserInputForm = () => {
+export const AnswerInputForm = () => {
   const [userAnswer, setUserAnswer] = useState(0);
 
   const onAnswerChange = (e) => {
@@ -18,7 +18,11 @@ export const UserInputForm = () => {
           label="Running Count?"
           value={userAnswer || ""}
           onChange={onAnswerChange}
+          type="number"
         />
+        <br />
+
+        <Button variant="outlined">Enter</Button>
       </form>
     </div>
   );

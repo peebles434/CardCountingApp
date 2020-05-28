@@ -1,29 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "../App.css";
 import { importedCardData } from "../utils/importedCardData";
 import { back } from "../utils/cardPics";
 import { CardCounter } from "./CardCounter";
-import { UserInputForm } from "./UserInputForm";
-
-function useInterval(callback, delay) {
-  const savedCallback = useRef();
-
-  // Remember the latest callback.
-  useEffect(() => {
-    savedCallback.current = callback;
-  }, [callback]);
-
-  // Set up the interval.
-  useEffect(() => {
-    function tick() {
-      savedCallback.current();
-    }
-    if (delay !== null) {
-      let id = setInterval(tick, delay);
-      return () => clearInterval(id);
-    }
-  }, [delay]);
-}
+import { useInterval } from "../hooks/useInterval";
 
 export const CardCountingApp = () => {
   const [chosenCard, setChosenCard] = useState({
@@ -32,19 +12,21 @@ export const CardCountingApp = () => {
     image: null,
   });
   const [count, setCount] = useState(0);
+  const [deck, setDeck] = useState([]);
 
-  function shuffle(sourceArray) {
-    for (var i = 0; i < sourceArray.length - 1; i++) {
-      var j = i + Math.floor(Math.random() * (sourceArray.length - i));
-
-      var temp = sourceArray[j];
-      sourceArray[j] = sourceArray[i];
-      sourceArray[i] = temp;
+  useEffect(() => {
+    function shuffle(a) {
+      var j, x, i;
+      for (i = a.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        x = a[i];
+        a[i] = a[j];
+        a[j] = x;
+      }
+      return a;
     }
-    return sourceArray;
-  }
-
-  const deck = shuffle(importedCardData);
+    setDeck(shuffle(importedCardData));
+  }, []);
 
   const drawFromDeck = () => {
     setCount(count + 1);
@@ -58,7 +40,6 @@ export const CardCountingApp = () => {
 
   return (
     <div>
-      <UserInputForm />
       <CardCounter chosenCard={chosenCard} count={count} />
       <div className="card-container">
         {count <= 51 ? (
