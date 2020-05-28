@@ -73,7 +73,7 @@ export const CardCountingApp = () => {
         ) : null}
         {count < 0 ? null : (
           <div className="card-item-2">
-            <img className="cardFront" src={chosenCard.image} alt="test" />
+            <img className="cardFront" src={chosenCard.image} alt="" />
           </div>
         )}
       </div>
