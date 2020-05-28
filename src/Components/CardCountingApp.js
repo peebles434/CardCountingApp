@@ -60,12 +60,21 @@ export const CardCountingApp = () => {
     <div>
       <UserInputForm />
       <CardCounter chosenCard={chosenCard} count={count} />
-      <div className="cardWrapper">
-        {count <= 50 ? (
-          <img className="cardBack" src={back} alt="" onClick={drawFromDeck} />
+      <div className="card-container">
+        {count <= 51 ? (
+          <div className="card-item-1">
+            <img
+              className="cardBack"
+              src={back}
+              alt=""
+              onClick={drawFromDeck}
+            />
+          </div>
         ) : null}
         {count < 0 ? null : (
-          <img className="cardFront" src={chosenCard.image} alt="test" />
+          <div className="card-item-2">
+            <img className="cardFront" src={chosenCard.image} alt="" />
+          </div>
         )}
       </div>
     </div>

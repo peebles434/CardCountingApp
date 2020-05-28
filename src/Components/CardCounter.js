@@ -12,7 +12,7 @@ export const CardCounter = (props) => {
     } else if (props.chosenCard.face.match(highCards)) {
       setRunningCount(runningCount - 1);
     }
-  }, [props.chosenCard.face]);
+  }, [props.chosenCard.face, props.chosenCard.suit]);
 
   return (
     <div>
