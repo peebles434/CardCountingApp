@@ -2,16 +2,24 @@ import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 
-export const AnswerInputForm = (props) => {
-  const [userAnswer, setUserAnswer] = useState(0);
-  const [answerMode, setAnswerMode] = useState({
-    checkAnswerMode: false,
-    correctAnswer: false,
-  });
-
+export const AnswerInputForm = ({
+  answerMode,
+  setAnswerMode,
+  userAnswer,
+  setUserAnswer,
+  runningCount,
+  count,
+}) => {
   const onAnswerChange = (e) => {
-    if (!e.currentTarget.value.match("(^[0-9]+$|^$)")) return false;
-    setUserAnswer(Number(e.currentTarget.value));
+    // if (!e.currentTarget.value.match("(^[0-9]+$|^$)")) return false;
+    setUserAnswer(e.currentTarget.value);
+  };
+
+  const keyPress = (e) => {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      checkAnswer();
+    }
   };
 
   const checkAnswer = () => {
@@ -19,20 +27,12 @@ export const AnswerInputForm = (props) => {
       checkAnswerMode: true,
       correctAnswer: false,
     });
-    if (userAnswer == props.runningCount) {
+    if (userAnswer == runningCount) {
       setAnswerMode({
         checkAnswerMode: true,
         correctAnswer: true,
       });
     }
-  };
-
-  const resumePlay = () => {
-    setAnswerMode({
-      checkAnswerMode: false,
-      correctAnswer: false,
-    });
-    setUserAnswer(0);
   };
 
   return (
@@ -44,14 +44,16 @@ export const AnswerInputForm = (props) => {
           value={userAnswer || ""}
           onChange={onAnswerChange}
           autoComplete="off"
-          disabled={props.count === 0 ? true : false}
+          disabled={count === 0 ? true : false}
+          type="number"
+          onKeyDown={keyPress}
         />
         <br />
 
         <Button
           variant="outlined"
           onClick={checkAnswer}
-          disabled={props.count === 0 ? true : false}
+          disabled={count === 0 ? true : false}
         >
           Enter
         </Button>
@@ -61,12 +63,7 @@ export const AnswerInputForm = (props) => {
           <p>Good Job! Click the deck to continue playing!</p>
         ) : null}
         {answerMode.checkAnswerMode && !answerMode.correctAnswer ? (
-          <p>You suck, the running count is actually {props.runningCount}</p>
-        ) : null}
-        {answerMode.checkAnswerMode ? (
-          <Button variant="outlined" onClick={resumePlay}>
-            Resume
-          </Button>
+          <p>You suck, the running count is actually {runningCount}</p>
         ) : null}
       </div>
     </div>
