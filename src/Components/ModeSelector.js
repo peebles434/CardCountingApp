@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
+import { modeSliderMarks, deckSliderMarks } from "../utils/sliderMarks";
 
 const useStyles = makeStyles({
   root: {
@@ -9,56 +10,11 @@ const useStyles = makeStyles({
   },
 });
 
-const deckMarks = [
-  {
-    value: 1,
-    label: "1",
-  },
-  {
-    value: 2,
-    label: "2",
-  },
-  {
-    value: 3,
-    label: "3",
-  },
-  {
-    value: 4,
-    label: "4",
-  },
-  {
-    value: 5,
-    label: "5",
-  },
-  {
-    value: 6,
-    label: "6",
-  },
-];
-const modeMarks = [
-  {
-    value: 1,
-    label: "Click",
-  },
-  {
-    value: 2,
-    label: "Auto-Easy",
-  },
-  {
-    value: 3,
-    label: "Auto-Medium",
-  },
-  {
-    value: 4,
-    label: "Auto-Hard",
-  },
-];
-
 function valuetext(value) {
   return `${value}`;
 }
 
-export const DeckSelector = () => {
+export const ModeSelector = (props) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -72,9 +28,10 @@ export const DeckSelector = () => {
           aria-labelledby="discrete-slider"
           valueLabelDisplay="off"
           step={1}
-          marks={deckMarks}
+          marks={deckSliderMarks}
           min={1}
           max={6}
+          disabled={props.count > 0 ? true : false}
         />
         <Typography id="discrete-slider" gutterBottom>
           Pick Playing Mode
@@ -85,9 +42,10 @@ export const DeckSelector = () => {
           aria-labelledby="discrete-slider"
           valueLabelDisplay="off"
           step={1}
-          marks={modeMarks}
+          marks={modeSliderMarks}
           min={1}
           max={4}
+          disabled={props.count > 0 ? true : false}
         />
       </div>
     </div>

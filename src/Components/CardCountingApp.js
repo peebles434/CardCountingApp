@@ -4,7 +4,7 @@ import { importedCardData } from "../utils/importedCardData";
 import { back } from "../utils/cardPics";
 import { CardCounter } from "./CardCounter";
 import { useInterval } from "../hooks/useInterval";
-import { DeckSelector } from "./DeckSelector";
+import { ModeSelector } from "./ModeSelector";
 
 export const CardCountingApp = () => {
   const [chosenCard, setChosenCard] = useState({
@@ -46,7 +46,7 @@ export const CardCountingApp = () => {
         Click the deck to flip the cards. See if your running count is accurate,
         below!
       </h4>
-      <DeckSelector />
+      <ModeSelector count={count} />
       <CardCounter chosenCard={chosenCard} count={count} />
       <div className="card-container">
         {count <= 51 ? (
