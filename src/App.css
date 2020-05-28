@@ -17,8 +17,21 @@ html {
   height: 75vh;
 }
 
-.playingCard {
+.cardBack {
   transform: scale(0.5);
+  cursor: pointer;
+  transition: 0.5s ease;
+}
+
+.cardBack:hover {
+  transform: scale(0.52);
+  transition: 0.5s ease;
+  animation: shadow-pulse 0.9s infinite;
+}
+
+.cardFront {
+  transform: scale(0.5);
+  transition: 0.5s ease;
 }
 
 .App {
@@ -57,5 +70,14 @@ html {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes shadow-pulse {
+  0% {
+    box-shadow: 0 0 0 0px rgba(15, 15, 15, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 0 35px rgba(0, 0, 0, 0);
   }
 }

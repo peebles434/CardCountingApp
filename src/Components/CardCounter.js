@@ -6,7 +6,6 @@ export const CardCounter = (props) => {
 
   useEffect(() => {
     const lowCards = /^(2|3|4|5|6)$/;
-    const midCards = /^(7|8|9)$/;
     const highCards = /^(10|J|Q|K|A)$/;
     if (props.chosenCard.face.match(lowCards)) {
       setRunningCount(runningCount + 1);
@@ -17,7 +16,7 @@ export const CardCounter = (props) => {
 
   return (
     <div>
-      <h1>Card Counter Here: {runningCount}</h1>
+      <h2>Running Count: {runningCount}</h2>
       <h2>Number of Cards: {props.count}</h2>
     </div>
   );

@@ -1,31 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
-import "../App.css";
+import React, { useState, useEffect } from "react";
 import { importedCardData } from "../utils/importedCardData";
 import { back } from "../utils/cardPics";
 import { CardCounter } from "./CardCounter";
 import { UserInputForm } from "./UserInputForm";
 
-function useInterval(callback, delay) {
-  const savedCallback = useRef();
-
-  // Remember the latest callback.
-  useEffect(() => {
-    savedCallback.current = callback;
-  }, [callback]);
-
-  // Set up the interval.
-  useEffect(() => {
-    function tick() {
-      savedCallback.current();
-    }
-    if (delay !== null) {
-      let id = setInterval(tick, delay);
-      return () => clearInterval(id);
-    }
-  }, [delay]);
-}
-
-export const CardCountingApp = () => {
+export const AutoDealer = () => {
   const [chosenCard, setChosenCard] = useState({
     suit: null,
     face: "0",
@@ -46,15 +25,10 @@ export const CardCountingApp = () => {
 
   const deck = shuffle(importedCardData);
 
-  const drawFromDeck = () => {
+  const timer = setTimeout(() => {
     setCount(count + 1);
     setChosenCard(deck[count]);
-  };
-
-  //   useInterval(() => {
-  //     setCount(count + 1);
-  //     setChosenCard(deck[count]);
-  //   }, 2000);
+  }, 3000);
 
   return (
     <div>
@@ -62,10 +36,10 @@ export const CardCountingApp = () => {
       <CardCounter chosenCard={chosenCard} count={count} />
       <div className="cardWrapper">
         {count <= 50 ? (
-          <img className="cardBack" src={back} alt="" onClick={drawFromDeck} />
+          <img className="playingCard" src={back} alt="" onClick={timer} />
         ) : null}
         {count < 0 ? null : (
-          <img className="cardFront" src={chosenCard.image} alt="test" />
+          <img className="playingCard" src={chosenCard.image} alt="test" />
         )}
       </div>
     </div>
