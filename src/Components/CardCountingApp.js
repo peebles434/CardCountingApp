@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
-import "../App.css";
-import { importedCardData } from "../utils/importedCardData";
-import { back } from "../utils/cardPics";
-import { CardCounter } from "./CardCounter";
-import { UserInputForm } from "./UserInputForm";
+import React, { useState, useEffect, useRef } from 'react';
+import '../App.css';
+import { importedCardData } from '../utils/importedCardData';
+import { back } from '../utils/cardPics';
+import { CardCounter } from './CardCounter';
+import { UserInputForm } from './UserInputForm';
 
 function useInterval(callback, delay) {
   const savedCallback = useRef();
@@ -28,7 +28,7 @@ function useInterval(callback, delay) {
 export const CardCountingApp = () => {
   const [chosenCard, setChosenCard] = useState({
     suit: null,
-    face: "0",
+    face: '0',
     image: null,
   });
   const [count, setCount] = useState(0);
@@ -60,12 +60,21 @@ export const CardCountingApp = () => {
     <div>
       <UserInputForm />
       <CardCounter chosenCard={chosenCard} count={count} />
-      <div className="cardWrapper">
+      <div className="card-container">
         {count <= 50 ? (
-          <img className="cardBack" src={back} alt="" onClick={drawFromDeck} />
+          <div className="card-item-1">
+            <img
+              className="cardBack"
+              src={back}
+              alt=""
+              onClick={drawFromDeck}
+            />
+          </div>
         ) : null}
         {count < 0 ? null : (
-          <img className="cardFront" src={chosenCard.image} alt="test" />
+          <div className="card-item-2">
+            <img className="cardFront" src={chosenCard.image} alt="" />
+          </div>
         )}
       </div>
     </div>
