@@ -32,6 +32,7 @@ export const AnswerInputForm = (props) => {
       checkAnswerMode: false,
       correctAnswer: false,
     });
+    setUserAnswer(0);
   };
 
   return (
@@ -43,10 +44,15 @@ export const AnswerInputForm = (props) => {
           value={userAnswer || ""}
           onChange={onAnswerChange}
           autoComplete="off"
+          disabled={props.count === 0 ? true : false}
         />
         <br />
 
-        <Button variant="outlined" onClick={checkAnswer}>
+        <Button
+          variant="outlined"
+          onClick={checkAnswer}
+          disabled={props.count === 0 ? true : false}
+        >
           Enter
         </Button>
       </form>
@@ -55,7 +61,7 @@ export const AnswerInputForm = (props) => {
           <p>Good Job! Click the deck to continue playing!</p>
         ) : null}
         {answerMode.checkAnswerMode && !answerMode.correctAnswer ? (
-          <p>You suck</p>
+          <p>You suck, the running count is actually {props.runningCount}</p>
         ) : null}
         {answerMode.checkAnswerMode ? (
           <Button variant="outlined" onClick={resumePlay}>

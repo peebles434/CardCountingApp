@@ -17,7 +17,7 @@ export const CardCounter = (props) => {
 
   return (
     <div>
-      <AnswerInputForm runningCount={runningCount} />
+      <AnswerInputForm runningCount={runningCount} count={props.count} />
       <h2>Running Count: {runningCount}</h2>
       <h2>Number of Cards: {props.count}</h2>
     </div>
