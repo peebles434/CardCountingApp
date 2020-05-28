@@ -41,13 +41,16 @@ export const CardCountingApp = () => {
 
   return (
     <div>
-      <h1>Card Counting Trainer: Beat the Casino!</h1>
-      <h4>
-        Click the deck to flip the cards. See if your running count is accurate,
-        below!
-      </h4>
-      <ModeSelector count={count} />
-      <CardCounter chosenCard={chosenCard} count={count} />
+      <div className="game-container">
+        <h1>Card Counting Trainer: Beat the Casino!</h1>
+        <h4>
+          Click the deck to flip the cards. See if your running count is
+          accurate, below!
+        </h4>
+        <ModeSelector count={count} />
+        <CardCounter chosenCard={chosenCard} count={count} />
+      </div>
+
       <div className="card-container">
         {count <= 51 ? (
           <div className="card-item-1">

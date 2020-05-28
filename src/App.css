@@ -55,7 +55,12 @@ img {
 }
 
 .sliders {
-  margin: 25px 0 0 25px;
+  width: 300px;
+  margin: 25px auto 25px auto;
+}
+
+.game-container {
+  text-align: center;
 }
 
 @keyframes shadow-pulse {
