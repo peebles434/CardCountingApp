@@ -24,7 +24,6 @@ html {
 img {
   max-width: 100%;
   height: auto;
-  transform: scale(0.5);
 }
 
 .card-item-1 {
@@ -39,6 +38,7 @@ img {
 
 .cardBack {
   transition: 0.5s ease;
+  transform: scale(0.5);
 }
 
 .cardBack:hover {
@@ -48,43 +48,10 @@ img {
   animation: shadow-pulse 0.9s infinite;
 }
 
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.cardFront {
+  -ms-transform: scale(0.5) rotate(10deg);
+  -webkit-transform: scale(0.5) rotate(10deg);
+  transform: scale(0.5) rotate(10deg);
 }
 
 @keyframes shadow-pulse {
