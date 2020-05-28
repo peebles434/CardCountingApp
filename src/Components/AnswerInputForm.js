@@ -60,10 +60,16 @@ export const AnswerInputForm = ({
       </form>
       <div>
         {answerMode.checkAnswerMode && answerMode.correctAnswer ? (
-          <p>Good Job! Click the deck to continue playing!</p>
+          <>
+            <p>Good Job!</p>
+            <p>Click the deck to keep playing!</p>
+          </>
         ) : null}
         {answerMode.checkAnswerMode && !answerMode.correctAnswer ? (
-          <p>You suck, the running count is actually {runningCount}</p>
+          <>
+            <p>You suck, the running count is actually {runningCount}.</p>
+            <p>Click the deck to keep playing!</p>
+          </>
         ) : null}
       </div>
     </div>
