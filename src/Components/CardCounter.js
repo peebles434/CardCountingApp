@@ -3,7 +3,7 @@ import "../App.css";
 import { AnswerInputForm } from "./AnswerInputForm";
 
 export const CardCounter = (props) => {
-  let [runningCount, setRunningCount] = useState(0);
+  const [runningCount, setRunningCount] = useState(0);
 
   useEffect(() => {
     const lowCards = /^(2|3|4|5|6)$/;
