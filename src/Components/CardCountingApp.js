@@ -34,10 +34,12 @@ export const CardCountingApp = () => {
     return a;
   }
 
+  // Shuffles 1 deck on initialization
   useEffect(() => {
     setDeck(shuffle(importedCardData));
   }, []);
 
+  // Changes the number of decks and shuffles them all. Number passed in from slider in ModeSelector
   const updateNumberOfDecks = (x) => {
     let newDeck = [];
     for (let i = 0; i < x; i++) {
@@ -51,6 +53,12 @@ export const CardCountingApp = () => {
     console.log(x);
   };
 
+  // TODO: Need to wire up updateGameMode. Will change between clicking and automatic dealing. Mode passed in from slider in ModeSelector
+  const updateGameMode = (x) => {
+    console.log(x);
+  };
+
+  // Increases count which displays new card. Function called in CardDisplay's onClick
   const drawFromDeck = () => {
     setCount(count + 1);
     setChosenCard(deck[count]);
@@ -63,6 +71,7 @@ export const CardCountingApp = () => {
     }
   };
 
+  // Starts game over on Reset button's onClick
   const resetDeck = () => {
     setCount(0);
     setChosenCard({
@@ -87,7 +96,11 @@ export const CardCountingApp = () => {
           Click the deck to flip the cards. See if your running count is
           accurate, below!
         </h4>
-        <ModeSelector count={count} updateNumberOfDecks={updateNumberOfDecks} />
+        <ModeSelector
+          count={count}
+          updateNumberOfDecks={updateNumberOfDecks}
+          updateGameMode={updateGameMode}
+        />
         <Button
           variant="outlined"
           onClick={resetDeck}

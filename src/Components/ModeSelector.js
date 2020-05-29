@@ -8,14 +8,27 @@ function valuetext(value) {
   return `${value}`;
 }
 
-export const ModeSelector = ({ count, updateNumberOfDecks }) => {
+export const ModeSelector = ({
+  count,
+  updateNumberOfDecks,
+  updateGameMode,
+}) => {
   const [deckSliderValue, setDeckSliderValue] = useState(1);
+  const [modeSliderValue, setModeSliderValue] = useState(1);
 
   const handleDeckSlider = (event, newValue) => {
     setDeckSliderValue(newValue);
   };
   const handleDeckSliderCommit = (event, newValue) => {
     updateNumberOfDecks(newValue);
+  };
+
+  const handleModeSlider = (event, newValue) => {
+    setModeSliderValue(newValue);
+  };
+
+  const handleModeSliderCommit = (event, newValue) => {
+    updateGameMode(newValue);
   };
 
   return (
@@ -40,8 +53,12 @@ export const ModeSelector = ({ count, updateNumberOfDecks }) => {
       <Typography id="discrete-slider" gutterBottom>
         Pick Playing Mode
       </Typography>
+      {/* TODO: Add functionality to Playing Mode Slider */}
       <Slider
+        value={modeSliderValue}
         defaultValue={1}
+        onChange={handleModeSlider}
+        onChangeCommitted={handleModeSliderCommit}
         getAriaValueText={valuetext}
         aria-labelledby="discrete-slider"
         valueLabelDisplay="off"

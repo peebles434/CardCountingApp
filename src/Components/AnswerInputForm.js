@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 
+// TODO: Add a True Count input and answer checker
 export const AnswerInputForm = ({
   answerMode,
   setAnswerMode,

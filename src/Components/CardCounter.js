@@ -13,6 +13,7 @@ export const CardCounter = ({
   setAnswerMode,
   deck,
 }) => {
+  // Checks the chosen card and determines if it is a low card, medium card, or high card
   useEffect(() => {
     const lowCards = /^(2|3|4|5|6)$/;
     const highCards = /^(10|J|Q|K|A)$/;
@@ -22,6 +23,13 @@ export const CardCounter = ({
       setRunningCount(runningCount - 1);
     }
   }, [chosenCard.face, chosenCard.suit]);
+
+  // Finds decks remaining and rounds it UP to the nearest .25
+  const roundDecksToTheQuarter = () => {
+    let decksRemaining = deck.length / 52 - count / 52;
+    let roundedDecksRemaining = Math.ceil(decksRemaining / 0.25) * 0.25;
+    return roundedDecksRemaining;
+  };
 
   return (
     <div>
@@ -33,10 +41,8 @@ export const CardCounter = ({
         answerMode={answerMode}
         setAnswerMode={setAnswerMode}
       />
-      <p> (To be removed) Running Count: {runningCount}</p>
-      <p>(To be removed) Number of Cards: {count}</p>
-      <h2>Number of Decks: {deck.length / 52}</h2>
-      <h2>Decks Remaining: {deck.length / 52 - count / 52} </h2>
+      <h2>Decks Remaining: {roundDecksToTheQuarter()} </h2>
+      <p>(To be removed) Running Count: {runningCount}</p>
     </div>
   );
 };

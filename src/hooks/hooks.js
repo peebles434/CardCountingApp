@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+// TODO: Needs to be connected to Components. May need to separate out.
 export const useAppState = () => {
   const [count, setCount] = useState(0);
   const [deck, setDeck] = useState([]);
