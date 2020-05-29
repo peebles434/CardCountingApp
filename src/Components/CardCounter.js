@@ -11,6 +11,7 @@ export const CardCounter = ({
   setUserAnswer,
   answerMode,
   setAnswerMode,
+  deck,
 }) => {
   useEffect(() => {
     const lowCards = /^(2|3|4|5|6)$/;
@@ -32,8 +33,10 @@ export const CardCounter = ({
         answerMode={answerMode}
         setAnswerMode={setAnswerMode}
       />
-      <h2>Running Count: {runningCount}</h2>
-      <h2>Number of Cards: {count}</h2>
+      <p> (To be removed) Running Count: {runningCount}</p>
+      <p>(To be removed) Number of Cards: {count}</p>
+      <h2>Number of Decks: {deck.length / 52}</h2>
+      <h2>Decks Remaining: {deck.length / 52 - count / 52} </h2>
     </div>
   );
 };

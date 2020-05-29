@@ -1,10 +1,10 @@
 import React from "react";
 import { back } from "../utils/cardPics";
 
-export const CardDisplay = ({ drawFromDeck, count, chosenCard }) => {
+export const CardDisplay = ({ drawFromDeck, count, chosenCard, deck }) => {
   return (
     <div className="card-container">
-      {count <= 51 ? (
+      {count <= deck.length - 1 ? (
         <div className="card-item-1">
           <img className="cardBack" src={back} alt="" onClick={drawFromDeck} />
         </div>

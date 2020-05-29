@@ -6,6 +6,7 @@ import { CardCounter } from "./CardCounter";
 import { useInterval } from "../hooks/useInterval";
 import { ModeSelector } from "./ModeSelector";
 import Button from "@material-ui/core/button";
+import { CardDisplay } from "./CardDisplay";
 
 export const CardCountingApp = () => {
   const [chosenCard, setChosenCard] = useState({
@@ -37,6 +38,19 @@ export const CardCountingApp = () => {
     setDeck(shuffle(importedCardData));
   }, []);
 
+  const updateNumberOfDecks = (x) => {
+    let newDeck = [];
+    for (let i = 0; i < x; i++) {
+      for (let j = 0; j < 52; j++) {
+        let singleDeck = importedCardData;
+        newDeck.push(singleDeck[j]);
+        newDeck = shuffle(newDeck);
+      }
+    }
+    setDeck(newDeck);
+    console.log(x);
+  };
+
   const drawFromDeck = () => {
     setCount(count + 1);
     setChosenCard(deck[count]);
@@ -57,7 +71,7 @@ export const CardCountingApp = () => {
       image: null,
     });
     setRunningCount(0);
-    setDeck(shuffle(importedCardData));
+    setDeck(shuffle(deck));
   };
 
   //   useInterval(() => {
@@ -73,7 +87,7 @@ export const CardCountingApp = () => {
           Click the deck to flip the cards. See if your running count is
           accurate, below!
         </h4>
-        <ModeSelector count={count} />
+        <ModeSelector count={count} updateNumberOfDecks={updateNumberOfDecks} />
         <Button
           variant="outlined"
           onClick={resetDeck}
@@ -90,26 +104,15 @@ export const CardCountingApp = () => {
           setUserAnswer={setUserAnswer}
           answerMode={answerMode}
           setAnswerMode={setAnswerMode}
+          deck={deck}
         />
       </div>
-
-      <div className="card-container">
-        {count <= 51 ? (
-          <div className="card-item-1">
-            <img
-              className="cardBack"
-              src={back}
-              alt=""
-              onClick={drawFromDeck}
-            />
-          </div>
-        ) : null}
-        {count < 0 ? null : (
-          <div className="card-item-2">
-            <img className="cardFront" src={chosenCard.image} alt="" />
-          </div>
-        )}
-      </div>
+      <CardDisplay
+        drawFromDeck={drawFromDeck}
+        count={count}
+        chosenCard={chosenCard}
+        deck={deck}
+      />
     </div>
   );
 };
