@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
 import { importedCardData } from "../utils/importedCardData";
-import { back } from "../utils/cardPics";
 import { CardCounter } from "./CardCounter";
 import { useInterval } from "../hooks/useInterval";
 import { ModeSelector } from "./ModeSelector";
@@ -50,10 +49,9 @@ export const CardCountingApp = () => {
       }
     }
     setDeck(newDeck);
-    console.log(x);
   };
 
-  // TODO: Need to wire up updateGameMode. Will change between clicking and automatic dealing. Mode passed in from slider in ModeSelector
+  // TODO: Need to wire up updateGameMode. Will change between clicking the deck and automatic dealing. Mode passed in from slider in ModeSelector
   const updateGameMode = (x) => {
     console.log(x);
   };
