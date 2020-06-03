@@ -4,7 +4,7 @@ import { importedCardData } from "../utils/importedCardData";
 import { CardCounter } from "./CardCounter";
 import { useInterval } from "../hooks/useInterval";
 import { ModeSelector } from "./ModeSelector";
-import Button from "@material-ui/core/button";
+import { Button, Link } from "@material-ui/core";
 import { CardDisplay } from "./CardDisplay";
 
 export const CardCountingApp = () => {
@@ -16,6 +16,7 @@ export const CardCountingApp = () => {
   const [count, setCount] = useState(0);
   const [deck, setDeck] = useState([]);
   const [runningCount, setRunningCount] = useState(0);
+  const [trueCount, setTrueCount] = useState(0);
   const [userAnswer, setUserAnswer] = useState(0);
   const [answerMode, setAnswerMode] = useState({
     checkAnswerMode: false,
@@ -94,6 +95,12 @@ export const CardCountingApp = () => {
           Click the deck to flip the cards. See if your running count is
           accurate, below!
         </h4>
+        <Link
+          href="https://www.blackjackapprenticeship.com/how-to-count-cards/"
+          color="primary"
+        >
+          Learn How to Count Cards Here
+        </Link>
         <ModeSelector
           count={count}
           updateNumberOfDecks={updateNumberOfDecks}
@@ -107,6 +114,8 @@ export const CardCountingApp = () => {
           Reset Deck
         </Button>
         <CardCounter
+          trueCount={trueCount}
+          setTrueCount={setTrueCount}
           runningCount={runningCount}
           setRunningCount={setRunningCount}
           chosenCard={chosenCard}

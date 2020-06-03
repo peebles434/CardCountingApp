@@ -28,7 +28,7 @@ export const AnswerInputForm = ({
       checkAnswerMode: true,
       correctAnswer: false,
     });
-    if (userAnswer === runningCount) {
+    if (userAnswer == runningCount) {
       setAnswerMode({
         checkAnswerMode: true,
         correctAnswer: true,
