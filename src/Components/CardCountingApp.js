@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
-import "../App.css";
-import { importedCardData } from "../utils/importedCardData";
-import { CardCounter } from "./CardCounter";
-import { useInterval } from "../hooks/useInterval";
-import { ModeSelector } from "./ModeSelector";
-import { Button, Link } from "@material-ui/core";
-import { CardDisplay } from "./CardDisplay";
+import React, { useState, useEffect } from 'react';
+import '../App.css';
+import { importedCardData } from '../utils/importedCardData';
+import { CardCounter } from './CardCounter';
+import { useInterval } from '../hooks/useInterval';
+import { ModeSelector } from './ModeSelector';
+import { Button, Link } from '@material-ui/core';
+import { CardDisplay } from './CardDisplay';
 
 export const CardCountingApp = () => {
   const [chosenCard, setChosenCard] = useState({
     suit: null,
-    face: "0",
+    face: '0',
     image: null,
   });
   const [count, setCount] = useState(0);
@@ -18,6 +18,7 @@ export const CardCountingApp = () => {
   const [runningCount, setRunningCount] = useState(0);
   const [trueCount, setTrueCount] = useState(0);
   const [userAnswer, setUserAnswer] = useState(0);
+  const [userTrueCountAnswer, setUserTrueCountAnswer] = useState(0);
   const [answerMode, setAnswerMode] = useState({
     checkAnswerMode: false,
     correctAnswer: false,
@@ -67,18 +68,21 @@ export const CardCountingApp = () => {
         correctAnswer: false,
       });
       setUserAnswer(0);
+      setUserTrueCountAnswer(0);
     }
   };
 
   // Starts game over on Reset button's onClick
   const resetDeck = () => {
     setCount(0);
+    setRunningCount(0);
     setChosenCard({
       suit: null,
-      face: "0",
+      face: '0',
       image: null,
     });
     setRunningCount(0);
+    setTrueCount(0);
     setDeck(shuffle(deck));
   };
 
@@ -114,6 +118,7 @@ export const CardCountingApp = () => {
           Reset Deck
         </Button>
         <CardCounter
+          userTrueCountAnswer={userTrueCountAnswer}
           trueCount={trueCount}
           setTrueCount={setTrueCount}
           runningCount={runningCount}
