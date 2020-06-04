@@ -66,7 +66,7 @@ export const AnswerInputForm = ({
           value={userTrueCountAnswer || ''}
           onChange={onTrueCountAnswerChange}
           autoComplete="off"
-          disabled={trueCount === 0 ? true : false}
+          disabled={count === 0 ? true : false}
           type="number"
           onKeyDown={keyPress}
         />
@@ -91,7 +91,7 @@ export const AnswerInputForm = ({
         {answerMode.checkAnswerMode && !answerMode.correctAnswer ? (
           <>
             <p>
-              You suck, running count: = {runningCount}, true count: =
+              You suck, running count: {runningCount}, true count:
               {trueCount}.
             </p>
             <p>Click the deck to keep playing!</p>

@@ -76,14 +76,18 @@ export const CardCountingApp = () => {
   const resetDeck = () => {
     setCount(0);
     setRunningCount(0);
+    setTrueCount(0);
     setChosenCard({
       suit: null,
       face: '0',
       image: null,
     });
-    setRunningCount(0);
-    setTrueCount(0);
+
     setDeck(shuffle(deck));
+    setAnswerMode({
+      checkAnswerMode: false,
+      correctAnswer: false,
+    });
   };
 
   //   useInterval(() => {
@@ -119,6 +123,7 @@ export const CardCountingApp = () => {
         </Button>
         <CardCounter
           userTrueCountAnswer={userTrueCountAnswer}
+          setUserTrueCountAnswer={setUserTrueCountAnswer}
           trueCount={trueCount}
           setTrueCount={setTrueCount}
           runningCount={runningCount}
