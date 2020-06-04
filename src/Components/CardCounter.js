@@ -1,8 +1,10 @@
-import React, { useEffect } from "react";
-import "../App.css";
-import { AnswerInputForm } from "./AnswerInputForm";
+import React, { useEffect } from 'react';
+import '../App.css';
+import { AnswerInputForm } from './AnswerInputForm';
 
 export const CardCounter = ({
+  userTrueCountAnswer,
+  setUserTrueCountAnswer,
   trueCount,
   setTrueCount,
   runningCount,
@@ -41,10 +43,14 @@ export const CardCounter = ({
   return (
     <div>
       <AnswerInputForm
+        trueCount={trueCount}
+        setTrueCount={setTrueCount}
         runningCount={runningCount}
         count={count}
         userAnswer={userAnswer}
         setUserAnswer={setUserAnswer}
+        userTrueCountAnswer={userTrueCountAnswer}
+        setUserTrueCountAnswer={setUserTrueCountAnswer}
         answerMode={answerMode}
         setAnswerMode={setAnswerMode}
       />
