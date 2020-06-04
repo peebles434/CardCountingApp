@@ -1,18 +1,26 @@
-import React, { useState } from "react";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
+import React from 'react';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
+// TODO: Add a True Count input and answer checker
 export const AnswerInputForm = ({
   answerMode,
   setAnswerMode,
   userAnswer,
   setUserAnswer,
+  userTrueCountAnswer,
+  setUserTrueCountAnswer,
   runningCount,
+  trueCount,
   count,
 }) => {
   const onAnswerChange = (e) => {
     // if (!e.currentTarget.value.match("(^[0-9]+$|^$)")) return false;
     setUserAnswer(e.currentTarget.value);
+  };
+
+  const onTrueCountAnswerChange = (e) => {
+    setUserTrueCountAnswer(e.currentTarget.value);
   };
 
   const keyPress = (e) => {
@@ -27,7 +35,7 @@ export const AnswerInputForm = ({
       checkAnswerMode: true,
       correctAnswer: false,
     });
-    if (userAnswer == runningCount) {
+    if (userAnswer == runningCount && userTrueCountAnswer == trueCount) {
       setAnswerMode({
         checkAnswerMode: true,
         correctAnswer: true,
@@ -41,19 +49,34 @@ export const AnswerInputForm = ({
         <TextField
           id="standard-basic"
           label="Running Count?"
-          value={userAnswer || ""}
+          value={userAnswer || ''}
           onChange={onAnswerChange}
           autoComplete="off"
           disabled={count === 0 ? true : false}
           type="number"
           onKeyDown={keyPress}
         />
+
+        <br />
+        <br />
+
+        <TextField
+          id="standard-basic"
+          label="True Count?"
+          value={userTrueCountAnswer || ''}
+          onChange={onTrueCountAnswerChange}
+          autoComplete="off"
+          disabled={count === 0 ? true : false}
+          type="number"
+          onKeyDown={keyPress}
+        />
+        <br />
         <br />
 
         <Button
           variant="outlined"
           onClick={checkAnswer}
-          disabled={count === 0 ? true : false}
+          disabled={count === 0 && trueCount === 0 ? true : false}
         >
           Enter
         </Button>
@@ -67,7 +90,10 @@ export const AnswerInputForm = ({
         ) : null}
         {answerMode.checkAnswerMode && !answerMode.correctAnswer ? (
           <>
-            <p>You suck, the running count is actually {runningCount}.</p>
+            <p>
+              You suck, running count: {runningCount}, true count:
+              {trueCount}.
+            </p>
             <p>Click the deck to keep playing!</p>
           </>
         ) : null}
