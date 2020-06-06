@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import '../App.css';
-import { importedCardData } from '../utils/importedCardData';
-import { CardCounter } from './CardCounter';
-import { useInterval } from '../hooks/useInterval';
-import { ModeSelector } from './ModeSelector';
-import { Button, Link } from '@material-ui/core';
-import { CardDisplay } from './CardDisplay';
+import React, { useState, useEffect } from "react";
+import "../App.css";
+import { importedCardData } from "../utils/importedCardData";
+import { CardCounter } from "./CardCounter";
+import { useInterval } from "../hooks/useInterval";
+import { ModeSelector } from "./ModeSelector";
+import { Button, Link } from "@material-ui/core";
+import { CardDisplay } from "./CardDisplay";
 
 export const CardCountingApp = () => {
   const [chosenCard, setChosenCard] = useState({
     suit: null,
-    face: '0',
+    face: "0",
     image: null,
   });
   const [count, setCount] = useState(0);
@@ -79,7 +79,7 @@ export const CardCountingApp = () => {
     setTrueCount(0);
     setChosenCard({
       suit: null,
-      face: '0',
+      face: "0",
       image: null,
     });
 
@@ -106,6 +106,7 @@ export const CardCountingApp = () => {
         <Link
           href="https://www.blackjackapprenticeship.com/how-to-count-cards/"
           color="primary"
+          target="_blank"
         >
           Learn How to Count Cards Here
         </Link>

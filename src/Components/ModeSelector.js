@@ -50,7 +50,7 @@ export const ModeSelector = ({
         disabled={count > 0 ? true : false}
       />
       <Typography id="discrete-slider" gutterBottom>
-        Pick Playing Mode
+        Pick Playing Mode (not yet functional)
       </Typography>
       {/* TODO: Add functionality to Playing Mode Slider */}
       <Slider
