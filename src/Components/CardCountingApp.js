@@ -82,12 +82,13 @@ export const CardCountingApp = () => {
       face: "0",
       image: null,
     });
-
     setDeck(shuffle(deck));
     setAnswerMode({
       checkAnswerMode: false,
       correctAnswer: false,
     });
+    setUserAnswer(0);
+    setUserTrueCountAnswer(0);
   };
 
   //   useInterval(() => {
