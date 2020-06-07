@@ -1,28 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import '../App.css';
-import { importedCardData } from '../utils/importedCardData';
-import { CardCounter } from './CardCounter';
-import { useInterval } from '../hooks/useInterval';
-import { ModeSelector } from './ModeSelector';
-import { Button, Link } from '@material-ui/core';
-import { CardDisplay } from './CardDisplay';
+import React, { useState, useEffect } from "react";
+import "../App.css";
+import { importedCardData } from "../utils/importedCardData";
+import { CardCounter } from "./CardCounter";
+import { useInterval } from "../hooks/useInterval";
+import { ModeSelector } from "./ModeSelector";
+import { Button, Link } from "@material-ui/core";
+import { CardDisplay } from "./CardDisplay";
+import { useAppState } from "../hooks/hooks";
 
 export const CardCountingApp = () => {
   const [chosenCard, setChosenCard] = useState({
     suit: null,
-    face: '0',
+    face: "0",
     image: null,
   });
   const [count, setCount] = useState(0);
   const [deck, setDeck] = useState([]);
-  const [runningCount, setRunningCount] = useState(0);
-  const [trueCount, setTrueCount] = useState(0);
   const [userAnswer, setUserAnswer] = useState(0);
   const [userTrueCountAnswer, setUserTrueCountAnswer] = useState(0);
   const [answerMode, setAnswerMode] = useState({
     checkAnswerMode: false,
     correctAnswer: false,
   });
+
+  const { setRunningCount, setTrueCount } = useAppState();
 
   function shuffle(a) {
     var j, x, i;
@@ -79,7 +80,7 @@ export const CardCountingApp = () => {
     setTrueCount(0);
     setChosenCard({
       suit: null,
-      face: '0',
+      face: "0",
       image: null,
     });
 
@@ -124,10 +125,6 @@ export const CardCountingApp = () => {
         <CardCounter
           userTrueCountAnswer={userTrueCountAnswer}
           setUserTrueCountAnswer={setUserTrueCountAnswer}
-          trueCount={trueCount}
-          setTrueCount={setTrueCount}
-          runningCount={runningCount}
-          setRunningCount={setRunningCount}
           chosenCard={chosenCard}
           count={count}
           userAnswer={userAnswer}

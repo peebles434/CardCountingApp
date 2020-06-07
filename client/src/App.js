@@ -11,6 +11,10 @@ const App = () => {
       .then((res) => setState({ apiResponse: res }));
   }
 
+  function saveAPI(formData) {
+    post(data, "/testAPI/save");
+  }
+
   useEffect(() => {
     callAPI();
   }, []);

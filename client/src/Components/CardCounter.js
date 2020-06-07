@@ -1,14 +1,11 @@
-import React, { useEffect } from 'react';
-import '../App.css';
-import { AnswerInputForm } from './AnswerInputForm';
+import React, { useEffect } from "react";
+import "../App.css";
+import { AnswerInputForm } from "./AnswerInputForm";
+import { useAppState } from "../hooks/hooks";
 
 export const CardCounter = ({
   userTrueCountAnswer,
   setUserTrueCountAnswer,
-  trueCount,
-  setTrueCount,
-  runningCount,
-  setRunningCount,
   chosenCard,
   count,
   userAnswer,
@@ -17,6 +14,12 @@ export const CardCounter = ({
   setAnswerMode,
   deck,
 }) => {
+  const {
+    setRunningCount,
+    setTrueCount,
+    runningCount,
+    trueCount,
+  } = useAppState();
   // TODO: Update reset deck button handler to also update truecount to zero
   // Checks the chosen card and determines if it is a low card, medium card, or high card
   useEffect(() => {
@@ -43,9 +46,6 @@ export const CardCounter = ({
   return (
     <div>
       <AnswerInputForm
-        trueCount={trueCount}
-        setTrueCount={setTrueCount}
-        runningCount={runningCount}
         count={count}
         userAnswer={userAnswer}
         setUserAnswer={setUserAnswer}

@@ -1,6 +1,7 @@
-import React from 'react';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import React from "react";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import { useAppState } from "../hooks/hooks";
 
 // TODO: Add a True Count input and answer checker
 export const AnswerInputForm = ({
@@ -10,10 +11,14 @@ export const AnswerInputForm = ({
   setUserAnswer,
   userTrueCountAnswer,
   setUserTrueCountAnswer,
-  runningCount,
-  trueCount,
   count,
 }) => {
+  const {
+    setRunningCount,
+    setTrueCount,
+    runningCount,
+    trueCount,
+  } = useAppState();
   const onAnswerChange = (e) => {
     // if (!e.currentTarget.value.match("(^[0-9]+$|^$)")) return false;
     setUserAnswer(e.currentTarget.value);
@@ -49,7 +54,7 @@ export const AnswerInputForm = ({
         <TextField
           id="standard-basic"
           label="Running Count?"
-          value={userAnswer || ''}
+          value={userAnswer || ""}
           onChange={onAnswerChange}
           autoComplete="off"
           disabled={count === 0 ? true : false}
@@ -63,7 +68,7 @@ export const AnswerInputForm = ({
         <TextField
           id="standard-basic"
           label="True Count?"
-          value={userTrueCountAnswer || ''}
+          value={userTrueCountAnswer || ""}
           onChange={onTrueCountAnswerChange}
           autoComplete="off"
           disabled={count === 0 ? true : false}
