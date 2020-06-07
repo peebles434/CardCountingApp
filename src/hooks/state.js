@@ -55,7 +55,6 @@ export const useAppState = () => {
     }));
   };
   const setChosenCard = (x) => {
-    console.log(x);
     setState((oldState) => ({
       ...oldState,
       chosenCard: x,

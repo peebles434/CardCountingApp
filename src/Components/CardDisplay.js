@@ -1,7 +1,10 @@
 import React from "react";
 import { back } from "../utils/cardPics";
+import { useAppState } from "../hooks/state";
 
-export const CardDisplay = ({ drawFromDeck, count, chosenCard, deck }) => {
+export const CardDisplay = ({ drawFromDeck, count, deck, chosenCard }) => {
+  const { state } = useAppState();
+
   return (
     <div className="card-container">
       {count <= deck.length - 1 ? (
