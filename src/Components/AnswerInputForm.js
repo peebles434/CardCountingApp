@@ -1,6 +1,6 @@
-import React from 'react';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import React from "react";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 
 // TODO: Add a True Count input and answer checker
 export const AnswerInputForm = ({
@@ -49,7 +49,7 @@ export const AnswerInputForm = ({
         <TextField
           id="standard-basic"
           label="Running Count?"
-          value={userAnswer || ''}
+          value={userAnswer || ""}
           onChange={onAnswerChange}
           autoComplete="off"
           disabled={count === 0 ? true : false}
@@ -63,7 +63,7 @@ export const AnswerInputForm = ({
         <TextField
           id="standard-basic"
           label="True Count?"
-          value={userTrueCountAnswer || ''}
+          value={userTrueCountAnswer || ""}
           onChange={onTrueCountAnswerChange}
           autoComplete="off"
           disabled={count === 0 ? true : false}
@@ -91,8 +91,8 @@ export const AnswerInputForm = ({
         {answerMode.checkAnswerMode && !answerMode.correctAnswer ? (
           <>
             <p>
-              You suck, running count: {runningCount}, true count:
-              {trueCount}.
+              Incorrect! The running count is {runningCount} and the true count
+              is {trueCount}.
             </p>
             <p>Click the deck to keep playing!</p>
           </>
