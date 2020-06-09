@@ -10,15 +10,7 @@ html {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  /* overflow: hidden; */
-}
-
-.card-container {
-  display: grid;
-  grid-template-columns: (2);
-  grid-auto-flow: column;
-  grid-auto-rows: 50%;
-  justify-items: center;
+  overflow: hidden;
 }
 
 img {
@@ -26,20 +18,47 @@ img {
   height: auto;
 }
 
-.card-item-1 {
-  grid-row: 1 / 2;
-  grid-column: 1 / 4;
-  margin: auto auto;
+.game-container {
+  display: grid;
+  grid-template-columns: 0.8fr repeat(2, 1.2fr) 0.8fr;
+  grid-template-rows: 0.5fr 2.2fr 0.3fr;
+  gap: 1px 1px;
+  grid-template-areas: 'sliders header header stats' 'card_container card_container card_container card_container' '. . . .';
 }
 
-.card-item-2 {
-  grid-row: 1 / 2;
-  grid-column: 2 / 4;
+.card_container {
+  justify-self: center;
 }
 
-.cardBack {
+.header {
+  grid-area: header;
+  justify-self: center;
+}
+
+.sliders {
+  grid-area: sliders;
+  justify-self: center;
+  width: 300px;
+  margin: 25px auto 25px auto;
+}
+
+.stats {
+  grid-area: stats;
+  justify-self: center;
+}
+
+.card_front {
+  grid-area: card_front;
+  -ms-transform: scale(0.5) rotate(10deg);
+  -webkit-transform: scale(0.5) rotate(10deg);
+  transform: scale(0.5) rotate(10deg);
+}
+
+.card_back {
+  grid-area: card_back;
   transition: 0.5s ease;
   transform: scale(0.5);
+  justify-self: center;
 }
 
 .cardBack:hover {
@@ -47,21 +66,6 @@ img {
   transform: scale(0.52);
   transition: 0.5s ease;
   animation: shadow-pulse 0.5s;
-}
-
-.cardFront {
-  -ms-transform: scale(0.5) rotate(10deg);
-  -webkit-transform: scale(0.5) rotate(10deg);
-  transform: scale(0.5) rotate(10deg);
-}
-
-.sliders {
-  width: 300px;
-  margin: 25px auto 25px auto;
-}
-
-.game-container {
-  text-align: center;
 }
 
 @keyframes shadow-pulse {

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import Typography from "@material-ui/core/Typography";
-import Slider from "@material-ui/core/Slider";
-import { modeSliderMarks, deckSliderMarks } from "../utils/sliderMarks";
+import React, { useState } from 'react';
+import Typography from '@material-ui/core/Typography';
+import Slider from '@material-ui/core/Slider';
+import { modeSliderMarks, deckSliderMarks } from '../utils/sliderMarks';
 
 function valuetext(value) {
   return `${value}`;
@@ -31,7 +31,7 @@ export const ModeSelector = ({
   };
 
   return (
-    <div className="sliders">
+    <div>
       <Typography id="discrete-slider" gutterBottom>
         Set Number of Decks
       </Typography>

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import '../App.css';
 import { importedCardData } from '../utils/importedCardData';
 import { CardCounter } from './CardCounter';
 import { useInterval } from '../hooks/useInterval';
 import { ModeSelector } from './ModeSelector';
 import { Button, Link } from '@material-ui/core';
 import { CardDisplay } from './CardDisplay';
+import '../App.css';
 
 export const CardCountingApp = () => {
   const [chosenCard, setChosenCard] = useState({
@@ -97,10 +97,10 @@ export const CardCountingApp = () => {
   //   }, 2000);
 
   return (
-    <div>
-      <div className="game-container">
-        <h1>Card Counting Trainer: Beat the Casino!</h1>
-        <h4>
+    <div className="game-container">
+      <div className="header">
+        <h1 id="header__brand">Card Counting Trainer: Beat the Casino!</h1>
+        <h4 id="header__instructions">
           Click the deck to flip the cards. See if your running count is
           accurate, below!
         </h4>
@@ -111,6 +111,8 @@ export const CardCountingApp = () => {
         >
           Learn How to Count Cards Here
         </Link>
+      </div>
+      <div className="sliders">
         <ModeSelector
           count={count}
           updateNumberOfDecks={updateNumberOfDecks}
@@ -123,6 +125,8 @@ export const CardCountingApp = () => {
         >
           Reset Deck
         </Button>
+      </div>
+      <div className="stats">
         <CardCounter
           userTrueCountAnswer={userTrueCountAnswer}
           setUserTrueCountAnswer={setUserTrueCountAnswer}
@@ -139,12 +143,14 @@ export const CardCountingApp = () => {
           deck={deck}
         />
       </div>
-      <CardDisplay
-        drawFromDeck={drawFromDeck}
-        count={count}
-        chosenCard={chosenCard}
-        deck={deck}
-      />
+      <div className="card_container">
+        <CardDisplay
+          drawFromDeck={drawFromDeck}
+          count={count}
+          chosenCard={chosenCard}
+          deck={deck}
+        />
+      </div>
     </div>
   );
 };
