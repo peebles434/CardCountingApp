@@ -1,6 +1,6 @@
-import React from 'react';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import React from "react";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 
 // TODO: Add a True Count input and answer checker
 export const AnswerInputForm = ({
@@ -15,12 +15,13 @@ export const AnswerInputForm = ({
   count,
 }) => {
   const onAnswerChange = (e) => {
-    // if (!e.currentTarget.value.match("(^[0-9]+$|^$)")) return false;
-    setUserAnswer(e.currentTarget.value);
+    let answer = parseInt(e.currentTarget.value);
+    setUserAnswer(answer);
   };
 
   const onTrueCountAnswerChange = (e) => {
-    setUserTrueCountAnswer(e.currentTarget.value);
+    let answer = parseInt(e.currentTarget.value);
+    setUserTrueCountAnswer(answer);
   };
 
   const keyPress = (e) => {
@@ -35,7 +36,7 @@ export const AnswerInputForm = ({
       checkAnswerMode: true,
       correctAnswer: false,
     });
-    if (userAnswer == runningCount && userTrueCountAnswer == trueCount) {
+    if (userAnswer === runningCount && userTrueCountAnswer === trueCount) {
       setAnswerMode({
         checkAnswerMode: true,
         correctAnswer: true,
@@ -49,7 +50,7 @@ export const AnswerInputForm = ({
         <TextField
           id="standard-basic"
           label="Running Count?"
-          value={userAnswer || ''}
+          value={userAnswer || ""}
           onChange={onAnswerChange}
           autoComplete="off"
           disabled={count === 0 ? true : false}
@@ -63,7 +64,7 @@ export const AnswerInputForm = ({
         <TextField
           id="standard-basic"
           label="True Count?"
-          value={userTrueCountAnswer || ''}
+          value={userTrueCountAnswer || ""}
           onChange={onTrueCountAnswerChange}
           autoComplete="off"
           disabled={count === 0 ? true : false}

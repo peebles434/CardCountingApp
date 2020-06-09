@@ -6,7 +6,6 @@ import { CardCounter } from "./CardCounter";
 import { ModeSelector } from "./ModeSelector";
 import { CardDisplay } from "./CardDisplay";
 import { Button, Link } from "@material-ui/core";
-import { useInterval } from "../hooks/useInterval";
 import "../App.css";
 
 export const CardCountingApp = observer(() => {
@@ -16,15 +15,23 @@ export const CardCountingApp = observer(() => {
     image: null,
   });
   const [deck, setDeck] = useState([]);
-  const [trueCount, setTrueCount] = useState(0);
-  const [userAnswer, setUserAnswer] = useState(0);
-  const [userTrueCountAnswer, setUserTrueCountAnswer] = useState(0);
   const [answerMode, setAnswerMode] = useState({
     checkAnswerMode: false,
     correctAnswer: false,
   });
 
-  const { count, setCount, runningCount, setRunningCount } = useStore();
+  const {
+    count,
+    setCount,
+    runningCount,
+    setRunningCount,
+    trueCount,
+    setTrueCount,
+    userAnswer,
+    setUserAnswer,
+    userTrueCountAnswer,
+    setUserTrueCountAnswer,
+  } = useStore();
 
   function shuffle(a) {
     var j, x, i;

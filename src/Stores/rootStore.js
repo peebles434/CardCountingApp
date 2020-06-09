@@ -8,7 +8,9 @@ const RootStore = types
     count: types.number,
     deck: types.array(CardModel),
     runningCount: types.number,
+    trueCount: types.number,
     userAnswer: types.number,
+    userTrueCountAnswer: types.number,
     suit: types.maybeNull(types.string),
     face: types.number,
     image: types.maybeNull(types.string),
@@ -27,7 +29,17 @@ const RootStore = types
     setRunningCount(value) {
       self.runningCount = value;
     },
+    setTrueCount(value) {
+      self.trueCount = value;
+    },
+    setUserAnswer(value) {
+      self.userAnswer = value;
+    },
+    setUserTrueCountAnswer(value) {
+      self.userTrueCountAnswer = value;
+    },
   }))
+
   // TODO: Needs to be updated, doesn't connect correctly
   .actions((self) => ({
     setDeck(value) {
