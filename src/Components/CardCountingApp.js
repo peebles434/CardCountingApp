@@ -23,9 +23,7 @@ export const CardCountingApp = observer(() => {
   const {
     count,
     setCount,
-    runningCount,
     setRunningCount,
-    trueCount,
     setTrueCount,
     userAnswer,
     setUserAnswer,
@@ -133,16 +131,7 @@ export const CardCountingApp = observer(() => {
           Reset Deck
         </Button>
         <CardCounter
-          userTrueCountAnswer={userTrueCountAnswer}
-          setUserTrueCountAnswer={setUserTrueCountAnswer}
-          trueCount={trueCount}
-          setTrueCount={setTrueCount}
-          runningCount={runningCount}
-          setRunningCount={setRunningCount}
           chosenCard={chosenCard}
-          count={count}
-          userAnswer={userAnswer}
-          setUserAnswer={setUserAnswer}
           answerMode={answerMode}
           setAnswerMode={setAnswerMode}
           deck={deck}

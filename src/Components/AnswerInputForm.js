@@ -1,19 +1,20 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
+import { useStore } from "../Stores/rootStore";
 
-// TODO: Add a True Count input and answer checker
-export const AnswerInputForm = ({
-  answerMode,
-  setAnswerMode,
-  userAnswer,
-  setUserAnswer,
-  userTrueCountAnswer,
-  setUserTrueCountAnswer,
-  runningCount,
-  trueCount,
-  count,
-}) => {
+// TODO: FIX ZERO ANSWER INPUT NOT WORKING
+export const AnswerInputForm = ({ answerMode, setAnswerMode }) => {
+  const {
+    count,
+    runningCount,
+    trueCount,
+    userAnswer,
+    setUserAnswer,
+    userTrueCountAnswer,
+    setUserTrueCountAnswer,
+  } = useStore();
+
   const onAnswerChange = (e) => {
     let answer = parseInt(e.currentTarget.value);
     setUserAnswer(answer);
