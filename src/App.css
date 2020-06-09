@@ -4,20 +4,20 @@
 }
 
 html {
-  background: url("https://www.solitaire-web-app.com/solitaire/images/backgrounds/1920x1200/green_felt.jpg")
+  background: url('https://www.solitaire-web-app.com/solitaire/images/backgrounds/1920x1200/green_felt.jpg')
     no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .card-container {
   display: grid;
   grid-template-columns: (2);
   grid-auto-flow: column;
-  grid-auto-rows: 100%;
+  grid-auto-rows: 50%;
   justify-items: center;
 }
 
@@ -29,6 +29,7 @@ img {
 .card-item-1 {
   grid-row: 1 / 2;
   grid-column: 1 / 4;
+  margin: auto auto;
 }
 
 .card-item-2 {

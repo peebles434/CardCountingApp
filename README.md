@@ -1,6 +1,5 @@
 <!-- TODO: -->
 
-1: True Count
 2: Auto Dealer
 3: Break out Play Mode:
 
