@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { importedCardData } from '../utils/importedCardData';
-import { CardCounter } from './CardCounter';
-import { useInterval } from '../hooks/useInterval';
-import { ModeSelector } from './ModeSelector';
-import { Button, Link } from '@material-ui/core';
-import { CardDisplay } from './CardDisplay';
-import '../App.css';
+import React, { useState, useEffect } from "react";
+import { importedCardData } from "../utils/importedCardData";
+import { CardCounter } from "./CardCounter";
+import { useInterval } from "../hooks/useInterval";
+import { ModeSelector } from "./ModeSelector";
+import { Button, Link } from "@material-ui/core";
+import { CardBack } from "./CardBack";
+import "../App.css";
+import { CardFront } from "./CardFront";
 
 export const CardCountingApp = () => {
   const [chosenCard, setChosenCard] = useState({
     suit: null,
-    face: '0',
+    face: "0",
     image: null,
   });
   const [count, setCount] = useState(0);
@@ -79,7 +80,7 @@ export const CardCountingApp = () => {
     setTrueCount(0);
     setChosenCard({
       suit: null,
-      face: '0',
+      face: "0",
       image: null,
     });
     setDeck(shuffle(deck));
@@ -143,13 +144,16 @@ export const CardCountingApp = () => {
           deck={deck}
         />
       </div>
-      <div className="card_container">
-        <CardDisplay
+      <div className="card_back">
+        <CardBack
           drawFromDeck={drawFromDeck}
           count={count}
           chosenCard={chosenCard}
           deck={deck}
         />
+      </div>
+      <div className="card_front">
+        <CardFront count={count} chosenCard={chosenCard} />
       </div>
     </div>
   );

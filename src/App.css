@@ -4,7 +4,7 @@
 }
 
 html {
-  background: url('https://www.solitaire-web-app.com/solitaire/images/backgrounds/1920x1200/green_felt.jpg')
+  background: url("https://www.solitaire-web-app.com/solitaire/images/backgrounds/1920x1200/green_felt.jpg")
     no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -14,7 +14,7 @@ html {
 }
 
 img {
-  max-width: 300px;
+  max-width: 100%;
   height: auto;
 }
 
@@ -23,11 +23,7 @@ img {
   grid-template-columns: 0.8fr repeat(2, 1.2fr) 0.8fr;
   grid-template-rows: 0.5fr 2.2fr 0.3fr;
   gap: 1px 1px;
-  grid-template-areas: 'sliders header header stats' 'card_container card_container card_container card_container' '. . . .';
-}
-
-.card_container {
-  justify-self: center;
+  grid-template-areas: "sliders header header stats" "sliders card_back card_front stats" ". . . .";
 }
 
 .header {
@@ -38,17 +34,20 @@ img {
 .sliders {
   grid-area: sliders;
   justify-self: center;
-  width: 300px;
+  align-items: center;
   margin: 25px auto 25px auto;
 }
 
 .stats {
   grid-area: stats;
+  display: flex;
+  align-items: center;
   justify-self: center;
 }
 
 .card_front {
   grid-area: card_front;
+  justify-self: center;
   -ms-transform: scale(0.5) rotate(10deg);
   -webkit-transform: scale(0.5) rotate(10deg);
   transform: scale(0.5) rotate(10deg);
@@ -56,12 +55,12 @@ img {
 
 .card_back {
   grid-area: card_back;
+  justify-self: center;
   transition: 0.5s ease;
   transform: scale(0.5);
-  justify-self: center;
 }
 
-.cardBack:hover {
+.card_back:hover {
   cursor: pointer;
   transform: scale(0.52);
   transition: 0.5s ease;
