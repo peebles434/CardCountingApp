@@ -1,2 +1,2 @@
-export * from '/GameModel';
-export * from '/UserModel';
+export * from "/GameModel";
+export * from "/UserModel";

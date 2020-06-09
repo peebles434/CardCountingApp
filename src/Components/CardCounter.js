@@ -1,23 +1,22 @@
-import React, { useEffect } from 'react';
-import '../App.css';
-import { AnswerInputForm } from './AnswerInputForm';
+import React, { useEffect } from "react";
+import { useStore } from "../Stores/rootStore";
+import { AnswerInputForm } from "./AnswerInputForm";
+import "../App.css";
 
 export const CardCounter = ({
-  userTrueCountAnswer,
-  setUserTrueCountAnswer,
-  trueCount,
-  setTrueCount,
-  runningCount,
-  setRunningCount,
   chosenCard,
-  count,
-  userAnswer,
-  setUserAnswer,
   answerMode,
   setAnswerMode,
   deck,
 }) => {
-  // TODO: Update reset deck button handler to also update truecount to zero
+  const {
+    count,
+    runningCount,
+    setRunningCount,
+    trueCount,
+    setTrueCount,
+  } = useStore();
+
   // Checks the chosen card and determines if it is a low card, medium card, or high card
   useEffect(() => {
     const lowCards = /^(2|3|4|5|6)$/;
@@ -42,18 +41,7 @@ export const CardCounter = ({
 
   return (
     <div>
-      <AnswerInputForm
-        trueCount={trueCount}
-        setTrueCount={setTrueCount}
-        runningCount={runningCount}
-        count={count}
-        userAnswer={userAnswer}
-        setUserAnswer={setUserAnswer}
-        userTrueCountAnswer={userTrueCountAnswer}
-        setUserTrueCountAnswer={setUserTrueCountAnswer}
-        answerMode={answerMode}
-        setAnswerMode={setAnswerMode}
-      />
+      <AnswerInputForm answerMode={answerMode} setAnswerMode={setAnswerMode} />
       <h2>Decks Remaining: {roundDecksToTheQuarter()} </h2>
       <p>(To be removed) Running Count: {runningCount}</p>
       <p>(To be removed) True Count: {trueCount}</p>
