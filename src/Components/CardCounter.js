@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import '../App.css';
-import { AnswerInputForm } from './AnswerInputForm';
+import React, { useEffect } from "react";
+import "../App.css";
+import { AnswerInputForm } from "./AnswerInputForm";
 
 export const CardCounter = ({
   userTrueCountAnswer,

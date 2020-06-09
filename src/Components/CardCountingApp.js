@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import '../App.css';
-import { importedCardData } from '../utils/importedCardData';
-import { CardCounter } from './CardCounter';
-import { useInterval } from '../hooks/useInterval';
-import { ModeSelector } from './ModeSelector';
-import { Button, Link } from '@material-ui/core';
-import { CardDisplay } from './CardDisplay';
+import React, { useState, useEffect } from "react";
+import { observer } from "mobx-react";
+import { useStore } from "../Stores/rootStore";
+import { importedCardData } from "../utils/importedCardData";
+import { CardCounter } from "./CardCounter";
+import { ModeSelector } from "./ModeSelector";
+import { CardDisplay } from "./CardDisplay";
+import { Button, Link } from "@material-ui/core";
+import { useInterval } from "../hooks/useInterval";
+import "../App.css";
 
-export const CardCountingApp = () => {
+export const CardCountingApp = observer(() => {
   const [chosenCard, setChosenCard] = useState({
     suit: null,
-    face: '0',
+    face: "0",
     image: null,
   });
-  const [count, setCount] = useState(0);
   const [deck, setDeck] = useState([]);
-  const [runningCount, setRunningCount] = useState(0);
   const [trueCount, setTrueCount] = useState(0);
   const [userAnswer, setUserAnswer] = useState(0);
   const [userTrueCountAnswer, setUserTrueCountAnswer] = useState(0);
@@ -23,6 +23,8 @@ export const CardCountingApp = () => {
     checkAnswerMode: false,
     correctAnswer: false,
   });
+
+  const { count, setCount, runningCount, setRunningCount } = useStore();
 
   function shuffle(a) {
     var j, x, i;
@@ -79,7 +81,7 @@ export const CardCountingApp = () => {
     setTrueCount(0);
     setChosenCard({
       suit: null,
-      face: '0',
+      face: "0",
       image: null,
     });
     setDeck(shuffle(deck));
@@ -147,4 +149,4 @@ export const CardCountingApp = () => {
       />
     </div>
   );
-};
+});
