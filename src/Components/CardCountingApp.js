@@ -4,7 +4,8 @@ import { useStore } from "../Stores/rootStore";
 import { importedCardData } from "../utils/importedCardData";
 import { CardCounter } from "./CardCounter";
 import { ModeSelector } from "./ModeSelector";
-import { CardDisplay } from "./CardDisplay";
+import { CardFront } from "./CardFront";
+import { CardBack } from "./CardBack";
 import { Button, Link } from "@material-ui/core";
 import "../App.css";
 
@@ -104,10 +105,10 @@ export const CardCountingApp = observer(() => {
   //   }, 2000);
 
   return (
-    <div>
-      <div className="game-container">
-        <h1>Card Counting Trainer: Beat the Casino!</h1>
-        <h4>
+    <div className="game-container">
+      <div className="header">
+        <h1 id="header__brand">Card Counting Trainer: Beat the Casino!</h1>
+        <h4 id="header__instructions">
           Click the deck to flip the cards. See if your running count is
           accurate, below!
         </h4>
@@ -118,6 +119,8 @@ export const CardCountingApp = observer(() => {
         >
           Learn How to Count Cards Here
         </Link>
+      </div>
+      <div className="sliders">
         <ModeSelector
           count={count}
           updateNumberOfDecks={updateNumberOfDecks}
@@ -130,6 +133,8 @@ export const CardCountingApp = observer(() => {
         >
           Reset Deck
         </Button>
+      </div>
+      <div className="stats">
         <CardCounter
           chosenCard={chosenCard}
           answerMode={answerMode}
@@ -137,12 +142,17 @@ export const CardCountingApp = observer(() => {
           deck={deck}
         />
       </div>
-      <CardDisplay
-        drawFromDeck={drawFromDeck}
-        count={count}
-        chosenCard={chosenCard}
-        deck={deck}
-      />
+      <div className="card_back">
+        <CardBack
+          drawFromDeck={drawFromDeck}
+          count={count}
+          chosenCard={chosenCard}
+          deck={deck}
+        />
+      </div>
+      <div className="card_front">
+        <CardFront count={count} chosenCard={chosenCard} />
+      </div>
     </div>
   );
 });
