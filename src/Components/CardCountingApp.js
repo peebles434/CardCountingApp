@@ -75,8 +75,8 @@ export const CardCountingApp = observer(() => {
         checkAnswerMode: false,
         correctAnswer: false,
       });
-      setUserAnswer(0);
-      setUserTrueCountAnswer(0);
+      setUserAnswer("");
+      setUserTrueCountAnswer("");
     }
   };
 
