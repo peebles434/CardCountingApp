@@ -16,13 +16,11 @@ export const AnswerInputForm = ({ answerMode, setAnswerMode }) => {
   } = useStore();
 
   const onAnswerChange = (e) => {
-    let answer = parseInt(e.currentTarget.value);
-    setUserAnswer(answer);
+    setUserAnswer(e.currentTarget.value);
   };
 
   const onTrueCountAnswerChange = (e) => {
-    let answer = parseInt(e.currentTarget.value);
-    setUserTrueCountAnswer(answer);
+    setUserTrueCountAnswer(e.currentTarget.value);
   };
 
   const keyPress = (e) => {
@@ -37,7 +35,10 @@ export const AnswerInputForm = ({ answerMode, setAnswerMode }) => {
       checkAnswerMode: true,
       correctAnswer: false,
     });
-    if (userAnswer === runningCount && userTrueCountAnswer === trueCount) {
+    if (
+      parseInt(userAnswer) === runningCount &&
+      parseInt(userTrueCountAnswer) === trueCount
+    ) {
       setAnswerMode({
         checkAnswerMode: true,
         correctAnswer: true,

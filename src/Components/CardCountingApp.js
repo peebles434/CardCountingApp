@@ -95,8 +95,8 @@ export const CardCountingApp = observer(() => {
       checkAnswerMode: false,
       correctAnswer: false,
     });
-    setUserAnswer(0);
-    setUserTrueCountAnswer(0);
+    setUserAnswer("");
+    setUserTrueCountAnswer("");
   };
 
   //   useInterval(() => {
@@ -126,13 +126,6 @@ export const CardCountingApp = observer(() => {
           updateNumberOfDecks={updateNumberOfDecks}
           updateGameMode={updateGameMode}
         />
-        <Button
-          variant="outlined"
-          onClick={resetDeck}
-          disabled={count > 0 ? false : true}
-        >
-          Reset Deck
-        </Button>
       </div>
       <div className="stats">
         <CardCounter
@@ -140,6 +133,7 @@ export const CardCountingApp = observer(() => {
           answerMode={answerMode}
           setAnswerMode={setAnswerMode}
           deck={deck}
+          resetDeck={resetDeck}
         />
       </div>
       <div className="card_back">
