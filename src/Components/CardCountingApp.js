@@ -20,6 +20,8 @@ export const CardCountingApp = observer(() => {
     checkAnswerMode: false,
     correctAnswer: false,
   });
+  // TODO: See why runningCount <p> tags lag behind unless set up with this useState.
+  const [updatedRunningCount, setUpdatedRunningCount] = useState(0);
 
   const {
     count,
@@ -97,6 +99,7 @@ export const CardCountingApp = observer(() => {
     });
     setUserAnswer("");
     setUserTrueCountAnswer("");
+    setUpdatedRunningCount(0);
   };
 
   //   useInterval(() => {
@@ -134,6 +137,8 @@ export const CardCountingApp = observer(() => {
           setAnswerMode={setAnswerMode}
           deck={deck}
           resetDeck={resetDeck}
+          updatedRunningCount={updatedRunningCount}
+          setUpdatedRunningCount={setUpdatedRunningCount}
         />
       </div>
       <div className="card_back">

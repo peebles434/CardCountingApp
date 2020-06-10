@@ -10,6 +10,8 @@ export const CardCounter = ({
   setAnswerMode,
   deck,
   resetDeck,
+  updatedRunningCount,
+  setUpdatedRunningCount,
 }) => {
   const {
     count,
@@ -18,9 +20,6 @@ export const CardCounter = ({
     trueCount,
     setTrueCount,
   } = useStore();
-
-  // TODO: See why runningCount <p> tags lag behind unless set up with this useState.
-  const [updatedRunningCount, setUpdatedRunningCount] = useState(0);
 
   // Checks the chosen card and determines if it is a low card, medium card, or high card
   useEffect(() => {
