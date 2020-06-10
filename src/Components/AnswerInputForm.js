@@ -1,26 +1,28 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
+import { useStore } from "../Stores/rootStore";
 
-// TODO: Add a True Count input and answer checker
-export const AnswerInputForm = ({
-  answerMode,
-  setAnswerMode,
-  userAnswer,
-  setUserAnswer,
-  userTrueCountAnswer,
-  setUserTrueCountAnswer,
-  runningCount,
-  trueCount,
-  count,
-}) => {
+// TODO: FIX ZERO ANSWER INPUT NOT WORKING
+export const AnswerInputForm = ({ answerMode, setAnswerMode }) => {
+  const {
+    count,
+    runningCount,
+    trueCount,
+    userAnswer,
+    setUserAnswer,
+    userTrueCountAnswer,
+    setUserTrueCountAnswer,
+  } = useStore();
+
   const onAnswerChange = (e) => {
-    // if (!e.currentTarget.value.match("(^[0-9]+$|^$)")) return false;
-    setUserAnswer(e.currentTarget.value);
+    let answer = parseInt(e.currentTarget.value);
+    setUserAnswer(answer);
   };
 
   const onTrueCountAnswerChange = (e) => {
-    setUserTrueCountAnswer(e.currentTarget.value);
+    let answer = parseInt(e.currentTarget.value);
+    setUserTrueCountAnswer(answer);
   };
 
   const keyPress = (e) => {
@@ -35,7 +37,7 @@ export const AnswerInputForm = ({
       checkAnswerMode: true,
       correctAnswer: false,
     });
-    if (userAnswer == runningCount && userTrueCountAnswer == trueCount) {
+    if (userAnswer === runningCount && userTrueCountAnswer === trueCount) {
       setAnswerMode({
         checkAnswerMode: true,
         correctAnswer: true,

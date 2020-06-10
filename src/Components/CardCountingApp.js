@@ -1,28 +1,36 @@
 import React, { useState, useEffect } from "react";
-import "../App.css";
+import { observer } from "mobx-react";
+import { useStore } from "../Stores/rootStore";
 import { importedCardData } from "../utils/importedCardData";
 import { CardCounter } from "./CardCounter";
-import { useInterval } from "../hooks/useInterval";
 import { ModeSelector } from "./ModeSelector";
+import { CardFront } from "./CardFront";
+import { CardBack } from "./CardBack";
 import { Button, Link } from "@material-ui/core";
-import { CardDisplay } from "./CardDisplay";
+import "../App.css";
 
-export const CardCountingApp = () => {
+export const CardCountingApp = observer(() => {
   const [chosenCard, setChosenCard] = useState({
     suit: null,
     face: "0",
     image: null,
   });
-  const [count, setCount] = useState(0);
   const [deck, setDeck] = useState([]);
-  const [runningCount, setRunningCount] = useState(0);
-  const [trueCount, setTrueCount] = useState(0);
-  const [userAnswer, setUserAnswer] = useState(0);
-  const [userTrueCountAnswer, setUserTrueCountAnswer] = useState(0);
   const [answerMode, setAnswerMode] = useState({
     checkAnswerMode: false,
     correctAnswer: false,
   });
+
+  const {
+    count,
+    setCount,
+    setRunningCount,
+    setTrueCount,
+    userAnswer,
+    setUserAnswer,
+    userTrueCountAnswer,
+    setUserTrueCountAnswer,
+  } = useStore();
 
   function shuffle(a) {
     var j, x, i;
@@ -97,10 +105,10 @@ export const CardCountingApp = () => {
   //   }, 2000);
 
   return (
-    <div>
-      <div className="game-container">
-        <h1>Card Counting Trainer: Beat the Casino!</h1>
-        <h4>
+    <div className="game-container">
+      <div className="header">
+        <h1 id="header__brand">Card Counting Trainer: Beat the Casino!</h1>
+        <h4 id="header__instructions">
           Click the deck to flip the cards. See if your running count is
           accurate, below!
         </h4>
@@ -111,6 +119,8 @@ export const CardCountingApp = () => {
         >
           Learn How to Count Cards Here
         </Link>
+      </div>
+      <div className="sliders">
         <ModeSelector
           count={count}
           updateNumberOfDecks={updateNumberOfDecks}
@@ -123,28 +133,26 @@ export const CardCountingApp = () => {
         >
           Reset Deck
         </Button>
+      </div>
+      <div className="stats">
         <CardCounter
-          userTrueCountAnswer={userTrueCountAnswer}
-          setUserTrueCountAnswer={setUserTrueCountAnswer}
-          trueCount={trueCount}
-          setTrueCount={setTrueCount}
-          runningCount={runningCount}
-          setRunningCount={setRunningCount}
           chosenCard={chosenCard}
-          count={count}
-          userAnswer={userAnswer}
-          setUserAnswer={setUserAnswer}
           answerMode={answerMode}
           setAnswerMode={setAnswerMode}
           deck={deck}
         />
       </div>
-      <CardDisplay
-        drawFromDeck={drawFromDeck}
-        count={count}
-        chosenCard={chosenCard}
-        deck={deck}
-      />
+      <div className="card_back">
+        <CardBack
+          drawFromDeck={drawFromDeck}
+          count={count}
+          chosenCard={chosenCard}
+          deck={deck}
+        />
+      </div>
+      <div className="card_front">
+        <CardFront count={count} chosenCard={chosenCard} />
+      </div>
     </div>
   );
-};
+});
