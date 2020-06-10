@@ -30,6 +30,7 @@ img {
   grid-area: header;
   justify-self: center;
   text-align: center;
+  padding-top: 10px;
 }
 
 .sliders {
@@ -43,9 +44,10 @@ img {
 
 .stats {
   grid-area: stats;
-  display: flex;
+  /* display: flex; */
   align-items: center;
   justify-self: center;
+  margin: auto;
 }
 
 .card_front {

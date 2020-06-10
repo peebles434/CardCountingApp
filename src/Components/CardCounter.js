@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useStore } from "../Stores/rootStore";
 import { AnswerInputForm } from "./AnswerInputForm";
+import { Button } from "@material-ui/core";
 import "../App.css";
 
 export const CardCounter = ({
@@ -8,6 +9,7 @@ export const CardCounter = ({
   answerMode,
   setAnswerMode,
   deck,
+  resetDeck,
 }) => {
   const {
     count,
@@ -42,6 +44,14 @@ export const CardCounter = ({
   return (
     <div>
       <AnswerInputForm answerMode={answerMode} setAnswerMode={setAnswerMode} />
+      <br />
+      <Button
+        variant="outlined"
+        onClick={resetDeck}
+        disabled={count > 0 ? false : true}
+      >
+        Reset Deck
+      </Button>
       <h2>Decks Remaining: {roundDecksToTheQuarter()} </h2>
       <p>(To be removed) Running Count: {runningCount}</p>
       <p>(To be removed) True Count: {trueCount}</p>
