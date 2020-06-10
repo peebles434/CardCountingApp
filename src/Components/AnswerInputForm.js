@@ -3,7 +3,6 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import { useStore } from "../Stores/rootStore";
 
-// TODO: FIX ZERO ANSWER INPUT NOT WORKING
 export const AnswerInputForm = ({ answerMode, setAnswerMode }) => {
   const {
     count,
