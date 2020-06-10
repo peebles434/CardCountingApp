@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useStore } from "../Stores/rootStore";
 import { AnswerInputForm } from "./AnswerInputForm";
 import { Button } from "@material-ui/core";
@@ -10,6 +10,8 @@ export const CardCounter = ({
   setAnswerMode,
   deck,
   resetDeck,
+  updatedRunningCount,
+  setUpdatedRunningCount,
 }) => {
   const {
     count,
@@ -26,9 +28,11 @@ export const CardCounter = ({
     if (chosenCard.face.match(lowCards)) {
       setRunningCount(runningCount + 1);
       setTrueCount(Math.round((runningCount + 1) / roundDecksToTheQuarter()));
+      setUpdatedRunningCount(runningCount + 1);
     } else if (chosenCard.face.match(highCards)) {
       setRunningCount(runningCount - 1);
       setTrueCount(Math.round((runningCount - 1) / roundDecksToTheQuarter()));
+      setUpdatedRunningCount(runningCount - 1);
     }
   }, [chosenCard.face, chosenCard.suit]);
 
@@ -38,8 +42,6 @@ export const CardCounter = ({
     let roundedDecksRemaining = Math.ceil(decksRemaining / 0.25) * 0.25;
     return roundedDecksRemaining;
   };
-
-  // roundedDeckRemaining, runningCount, Math.round(runningCount / roundedDeckRemaining)
 
   return (
     <div>
@@ -53,7 +55,7 @@ export const CardCounter = ({
         Reset Deck
       </Button>
       <h2>Decks Remaining: {roundDecksToTheQuarter()} </h2>
-      <p>(To be removed) Running Count: {runningCount}</p>
+      <p>(To be removed) Running Count: {updatedRunningCount}</p>
       <p>(To be removed) True Count: {trueCount}</p>
     </div>
   );

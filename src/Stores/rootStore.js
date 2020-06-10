@@ -22,6 +22,11 @@ const RootStore = types
   .volatile((self) => ({
     answerDraft: {},
   }))
+  .views((self) => ({
+    get updatedRunningCount() {
+      return self.runningCount;
+    },
+  }))
   .actions((self) => ({
     setCount(value) {
       self.count = value;
