@@ -93,10 +93,9 @@ export const AnswerInputForm = ({ answerMode, setAnswerMode }) => {
         ) : null}
         {answerMode.checkAnswerMode && !answerMode.correctAnswer ? (
           <>
-            <p>
-              Incorrect! The running count is {runningCount} and the true count
-              is {trueCount}.
-            </p>
+            <p>Incorrect!</p>
+            <p>The running count is {runningCount}.</p>
+            <p>The true count is {trueCount}.</p>
             <p>Click the deck to keep playing!</p>
           </>
         ) : null}
