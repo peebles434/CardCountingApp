@@ -29,6 +29,7 @@ img {
 .header {
   grid-area: header;
   justify-self: center;
+  text-align: center;
 }
 
 .sliders {
@@ -36,6 +37,8 @@ img {
   justify-self: center;
   align-items: center;
   margin: 25px auto 25px auto;
+  padding-left: 10px;
+  text-align: center;
 }
 
 .stats {
