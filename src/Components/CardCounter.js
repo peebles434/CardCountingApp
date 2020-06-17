@@ -21,6 +21,17 @@ export const CardCounter = ({
     setTrueCount,
   } = useStore();
 
+  const [runningCountTesting, setRunningCountTesting] = useState(false);
+  const [trueCountTesting, setTrueCountTesting] = useState(false);
+
+  const toggleRunningCount = () => {
+    setRunningCountTesting(!runningCountTesting);
+  };
+
+  const toggleTrueCount = () => {
+    setTrueCountTesting(!trueCountTesting);
+  };
+
   // Checks the chosen card and determines if it is a low card, medium card, or high card
   useEffect(() => {
     const lowCards = /^(2|3|4|5|6)$/;
@@ -55,8 +66,14 @@ export const CardCounter = ({
         Reset Deck
       </Button>
       <h2>Decks Remaining: {roundDecksToTheQuarter()} </h2>
-      <p>(To be removed) Running Count: {updatedRunningCount}</p>
-      <p>(To be removed) True Count: {trueCount}</p>
+      <p onClick={toggleRunningCount}>
+        Click <b>here</b> to see running count for testing purposes:{" "}
+        {runningCountTesting ? runningCount : ""}
+      </p>
+      <p onClick={toggleTrueCount}>
+        Click <b>here</b> to see true count for testing purposes:{" "}
+        {trueCountTesting ? trueCount : ""}
+      </p>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import { useStore } from "../Stores/rootStore";
@@ -93,7 +93,8 @@ export const AnswerInputForm = ({ answerMode, setAnswerMode }) => {
         {answerMode.checkAnswerMode && !answerMode.correctAnswer ? (
           <>
             <p>Incorrect!</p>
-            <p>The running count is {runningCount}.</p>
+
+            <p>The running count is {runningCount}</p>
             <p>The true count is {trueCount}.</p>
             <p>Click the deck to keep playing!</p>
           </>
