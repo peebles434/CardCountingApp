@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useStore } from "../Stores/rootStore";
-import { AnswerInputForm } from "./AnswerInputForm";
-import { Button } from "@material-ui/core";
-import "../App.css";
+import React, { useEffect, useState } from 'react';
+import { useStore } from '../Stores/rootStore';
+import { AnswerInputForm } from './AnswerInputForm';
+import { Button } from '@material-ui/core';
+import '../App.css';
 
 export const CardCounter = ({
   chosenCard,
@@ -67,12 +67,12 @@ export const CardCounter = ({
       </Button>
       <h2>Decks Remaining: {roundDecksToTheQuarter()} </h2>
       <p className="hideCounts" onClick={toggleRunningCount}>
-        Click <b>here</b> to see running count for testing purposes:{" "}
-        {runningCountTesting ? runningCount : ""}
+        Click <b>here</b> to see running count for testing purposes:{' '}
+        {runningCountTesting ? runningCount : ''}
       </p>
       <p className="hideCounts" onClick={toggleTrueCount}>
-        Click <b>here</b> to see true count for testing purposes:{" "}
-        {trueCountTesting ? trueCount : ""}
+        Click <b>here</b> to see true count for testing purposes:{' '}
+        {trueCountTesting ? trueCount : ''}
       </p>
     </div>
   );

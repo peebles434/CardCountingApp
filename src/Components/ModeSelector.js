@@ -1,13 +1,9 @@
-import React, { useState } from "react";
-import { observer } from "mobx-react";
-import { useStore } from "../Stores/rootStore";
-import Typography from "@material-ui/core/Typography";
-import Slider from "@material-ui/core/Slider";
-import { modeSliderMarks, deckSliderMarks } from "../utils/sliderMarks";
-
-function valuetext(value) {
-  return `${value}`;
-}
+import React, { useState } from 'react';
+import { observer } from 'mobx-react';
+import { useStore } from '../Stores/rootStore';
+import Typography from '@material-ui/core/Typography';
+import Slider from '@material-ui/core/Slider';
+import { modeSliderMarks, deckSliderMarks } from '../utils/sliderMarks';
 
 export const ModeSelector = observer(
   ({ updateNumberOfDecks, updateGameMode }) => {
@@ -29,6 +25,10 @@ export const ModeSelector = observer(
 
     const handleModeSliderCommit = (event, newValue) => {
       updateGameMode(newValue);
+    };
+
+    const valuetext = (value) => {
+      return `${value}`;
     };
 
     return (
