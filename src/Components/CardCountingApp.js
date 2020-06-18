@@ -6,6 +6,7 @@ import { CardCounter } from "./CardCounter";
 import { ModeSelector } from "./ModeSelector";
 import { CardFront } from "./CardFront";
 import { CardBack } from "./CardBack";
+import { shuffle } from "../Logic/CardCountingAppLogic";
 import { Button, Link } from "@material-ui/core";
 import "../App.css";
 
@@ -32,22 +33,7 @@ export const CardCountingApp = observer(() => {
     setUserAnswer,
     userTrueCountAnswer,
     setUserTrueCountAnswer,
-    dealerMode,
-    setDealerMode,
-    dealerDifficulty,
-    setDealerDifficulty,
   } = useStore();
-
-  function shuffle(a) {
-    var j, x, i;
-    for (i = a.length - 1; i > 0; i--) {
-      j = Math.floor(Math.random() * (i + 1));
-      x = a[i];
-      a[i] = a[j];
-      a[j] = x;
-    }
-    return a;
-  }
 
   // Shuffles 1 deck on initialization
   useEffect(() => {
@@ -66,29 +52,6 @@ export const CardCountingApp = observer(() => {
     }
     setDeck(newDeck);
   };
-
-  // TODO: Need to wire up updateGameMode. Will change between clicking the deck and automatic dealing. Mode passed in from slider in ModeSelector
-  const updateGameMode = (x) => {
-    if (x === 1) {
-      setDealerMode("click");
-    } else if (x > 1) {
-      setDealerMode("auto");
-    }
-    if (x === 1) {
-      setDealerDifficulty(null);
-    } else if (x === 2) {
-      setDealerDifficulty("easy");
-    } else if (x === 3) {
-      setDealerDifficulty("medium");
-    } else if (x === 4) {
-      setDealerDifficulty("hard");
-    }
-  };
-
-  useEffect(() => {
-    console.log(dealerMode);
-    console.log(dealerDifficulty);
-  }, [dealerMode, dealerDifficulty]);
 
   // Increases count which displays new card. Function called in CardDisplay's onClick
   const drawFromDeck = () => {
@@ -141,11 +104,7 @@ export const CardCountingApp = observer(() => {
         </Link>
       </div>
       <div className="sliders">
-        <ModeSelector
-          count={count}
-          updateNumberOfDecks={updateNumberOfDecks}
-          updateGameMode={updateGameMode}
-        />
+        <ModeSelector count={count} updateNumberOfDecks={updateNumberOfDecks} />
       </div>
       <div className="stats">
         <CardCounter

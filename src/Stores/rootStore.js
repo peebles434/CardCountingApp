@@ -44,11 +44,23 @@ const RootStore = types
     setUserTrueCountAnswer(value) {
       self.userTrueCountAnswer = value;
     },
-    setDealerMode(value) {
-      self.dealerMode = value;
-    },
-    setDealerDifficulty(value) {
-      self.dealerDifficulty = value;
+  }))
+  .actions((self) => ({
+    updateGameMode(x) {
+      if (x === 1) {
+        self.dealerMode = "click";
+      } else if (x > 1) {
+        self.dealerMode = "auto";
+      }
+      if (x === 1) {
+        self.dealerDifficulty = null;
+      } else if (x === 2) {
+        self.dealerDifficulty = "easy";
+      } else if (x === 3) {
+        self.dealerDifficulty = "medium";
+      } else if (x === 4) {
+        self.dealerDifficulty = "hard";
+      }
     },
   }))
 

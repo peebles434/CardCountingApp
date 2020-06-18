@@ -20,7 +20,7 @@ export const CardBack = ({ drawFromDeck, count, deck }) => {
       clearInterval(interval);
     }
     return () => clearInterval(interval);
-  }, [isActive, autoCount]);
+  }, [isActive, autoCount, drawFromDeck]);
 
   return (
     <div>
