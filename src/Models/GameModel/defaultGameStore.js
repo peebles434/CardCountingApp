@@ -12,4 +12,5 @@ export const DefaultGameStore = {
   correctAnswer: false,
   numberOfDecks: 1,
   dealerMode: "click",
+  dealerDifficulty: null,
 };

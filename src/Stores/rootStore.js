@@ -18,6 +18,7 @@ const RootStore = types
     correctAnswer: types.boolean,
     numberOfDecks: types.number,
     dealerMode: types.string,
+    dealerDifficulty: types.maybeNull(types.string),
   })
   .volatile((self) => ({
     answerDraft: {},
@@ -42,6 +43,12 @@ const RootStore = types
     },
     setUserTrueCountAnswer(value) {
       self.userTrueCountAnswer = value;
+    },
+    setDealerMode(value) {
+      self.dealerMode = value;
+    },
+    setDealerDifficulty(value) {
+      self.dealerDifficulty = value;
     },
   }))
 

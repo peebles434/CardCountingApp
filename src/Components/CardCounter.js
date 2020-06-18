@@ -66,11 +66,11 @@ export const CardCounter = ({
         Reset Deck
       </Button>
       <h2>Decks Remaining: {roundDecksToTheQuarter()} </h2>
-      <p onClick={toggleRunningCount}>
+      <p className="hideCounts" onClick={toggleRunningCount}>
         Click <b>here</b> to see running count for testing purposes:{" "}
         {runningCountTesting ? runningCount : ""}
       </p>
-      <p onClick={toggleTrueCount}>
+      <p className="hideCounts" onClick={toggleTrueCount}>
         Click <b>here</b> to see true count for testing purposes:{" "}
         {trueCountTesting ? trueCount : ""}
       </p>

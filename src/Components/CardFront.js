@@ -5,7 +5,12 @@ export const CardFront = ({ count, chosenCard }) => {
     <div>
       {count < 0 ? null : (
         <div>
-          <img className="cardFront" src={chosenCard.image} alt="" />
+          <img
+            className="cardFront noselect"
+            src={chosenCard.image}
+            alt=""
+            draggable={false}
+          />
         </div>
       )}
     </div>

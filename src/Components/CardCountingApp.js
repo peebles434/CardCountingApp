@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useInterval } from "react";
 import { observer } from "mobx-react";
 import { useStore } from "../Stores/rootStore";
 import { importedCardData } from "../utils/importedCardData";
@@ -32,6 +32,10 @@ export const CardCountingApp = observer(() => {
     setUserAnswer,
     userTrueCountAnswer,
     setUserTrueCountAnswer,
+    dealerMode,
+    setDealerMode,
+    dealerDifficulty,
+    setDealerDifficulty,
   } = useStore();
 
   function shuffle(a) {
@@ -65,8 +69,26 @@ export const CardCountingApp = observer(() => {
 
   // TODO: Need to wire up updateGameMode. Will change between clicking the deck and automatic dealing. Mode passed in from slider in ModeSelector
   const updateGameMode = (x) => {
-    console.log(x);
+    if (x === 1) {
+      setDealerMode("click");
+    } else if (x > 1) {
+      setDealerMode("auto");
+    }
+    if (x === 1) {
+      setDealerDifficulty(null);
+    } else if (x === 2) {
+      setDealerDifficulty("easy");
+    } else if (x === 3) {
+      setDealerDifficulty("medium");
+    } else if (x === 4) {
+      setDealerDifficulty("hard");
+    }
   };
+
+  useEffect(() => {
+    console.log(dealerMode);
+    console.log(dealerDifficulty);
+  }, [dealerMode, dealerDifficulty]);
 
   // Increases count which displays new card. Function called in CardDisplay's onClick
   const drawFromDeck = () => {
@@ -101,11 +123,6 @@ export const CardCountingApp = observer(() => {
     setUserTrueCountAnswer("");
     setUpdatedRunningCount(0);
   };
-
-  //   useInterval(() => {
-  //     setCount(count + 1);
-  //     setChosenCard(deck[count]);
-  //   }, 2000);
 
   return (
     <div className="game-container">
