@@ -50,7 +50,7 @@ export const ModeSelector = observer(({ updateNumberOfDecks }) => {
         disabled={count > 0 ? true : false}
       />
       <Typography id="discrete-slider" gutterBottom>
-        Pick Playing Mode (not yet functional)
+        Pick Playing Mode
       </Typography>
       {/* TODO: Add functionality to Playing Mode Slider */}
       <Slider
