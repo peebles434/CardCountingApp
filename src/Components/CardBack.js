@@ -42,12 +42,12 @@ export const CardBack = observer(({ drawFromDeck, count, deck }) => {
     setDealerStopPoint(randomDealerStop());
   }, []);
 
-  // useEffect(() => {
-  //   console.log(autoCount + " - " + dealerStopPoint);
-  //   if (autoCount === dealerStopPoint) {
-  //     setIsActive(!isActive);
-  //   }
-  // }, [autoCount]);
+  useEffect(() => {
+    console.log(autoCount + " - " + dealerStopPoint);
+    if (autoCount === dealerStopPoint) {
+      setIsActive(!isActive);
+    }
+  }, [autoCount]);
 
   return (
     <div>
