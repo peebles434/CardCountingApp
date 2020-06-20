@@ -1,15 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useStore } from "../Stores/rootStore";
-import { AnswerInputForm } from "./AnswerInputForm";
 import { Button } from "@material-ui/core";
 import "../App.css";
 
-export const CardCounter = ({
-  answerMode,
-  setAnswerMode,
-  resetDeck,
-  setUpdatedRunningCount,
-}) => {
+export const CardCounter = ({ resetDeck, setUpdatedRunningCount }) => {
   const {
     count,
     runningCount,
@@ -57,17 +51,9 @@ export const CardCounter = ({
   };
 
   return (
-    <div>
-      <AnswerInputForm answerMode={answerMode} setAnswerMode={setAnswerMode} />
-      <br />
-      <Button
-        variant="outlined"
-        onClick={resetDeck}
-        disabled={count > 0 ? false : true}
-      >
-        Reset Deck
-      </Button>
+    <div className="deckStats">
       <h2>Decks Remaining: {roundDecksToTheQuarter()} </h2>
+      <br />
       <p className="hideCounts" onClick={toggleRunningCount}>
         Click <b>here</b> to see running count for testing purposes:{" "}
         {runningCountTesting ? runningCount : ""}
@@ -76,6 +62,14 @@ export const CardCounter = ({
         Click <b>here</b> to see true count for testing purposes:{" "}
         {trueCountTesting ? (isNaN(trueCount) ? 0 : trueCount) : ""}
       </p>
+      <br />
+      <Button
+        variant="outlined"
+        onClick={resetDeck}
+        disabled={count > 0 ? false : true}
+      >
+        Reset Deck
+      </Button>
     </div>
   );
 };

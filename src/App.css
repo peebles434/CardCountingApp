@@ -10,7 +10,7 @@ html {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 img {
@@ -20,34 +20,50 @@ img {
 
 .game-container {
   display: grid;
-  grid-template-columns: 0.8fr repeat(2, 1.2fr) 0.8fr;
-  grid-template-rows: 0.5fr 2.2fr 0.3fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 10% 20% 35% 20%;
   gap: 1px 1px;
-  grid-template-areas: "sliders header header stats" "sliders card_back card_front stats" ". . . .";
+  grid-template-areas: "header header header header" ". countStats deckStats ." ". card_back card_front ." ". sliders sliders .";
 }
 
 .header {
   grid-area: header;
-  justify-self: center;
+  margin-top: 20px;
   text-align: center;
-  padding-top: 10px;
+  place-self: center;
+  font-size: 30px;
+}
+
+.card_back {
+  grid-area: card_back;
+  place-self: center;
+  transition: 0.5s ease;
+  transform: scale(0.5);
+}
+
+.card_front {
+  grid-area: card_front;
+  place-self: center;
+  -ms-transform: scale(0.5) rotate(10deg);
+  -webkit-transform: scale(0.5) rotate(10deg);
+  transform: scale(0.5) rotate(10deg);
 }
 
 .sliders {
   grid-area: sliders;
-  justify-self: center;
-  align-items: center;
-  margin: auto;
-  padding-left: 10px;
-  text-align: center;
+  place-self: center;
 }
 
-.stats {
-  grid-area: stats;
-  /* display: flex; */
-  align-items: center;
-  justify-self: center;
-  margin: auto;
+.countStats {
+  grid-area: countStats;
+  place-self: center;
+  /* font-size: 20px; */
+}
+
+.deckStats {
+  grid-area: deckStats;
+  place-self: center;
+  /* font-size: 20px; */
 }
 
 .hideCounts {
@@ -68,21 +84,6 @@ img {
                                supported by Chrome, Edge, Opera and Firefox */
 }
 
-.card_front {
-  grid-area: card_front;
-  justify-self: center;
-  -ms-transform: scale(0.5) rotate(10deg);
-  -webkit-transform: scale(0.5) rotate(10deg);
-  transform: scale(0.5) rotate(10deg);
-}
-
-.card_back {
-  grid-area: card_back;
-  justify-self: center;
-  transition: 0.5s ease;
-  transform: scale(0.5);
-}
-
 .card_back:hover {
   cursor: pointer;
   transform: scale(0.52);
@@ -96,5 +97,105 @@ img {
   }
   100% {
     box-shadow: 0 0 0 35px rgba(0, 0, 0, 0);
+  }
+}
+
+@media only screen and (max-width: 1500px) {
+  .game-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 10% 20% 35% 20%;
+    gap: 1px 1px;
+    grid-template-areas: "header header header header" "countStats countStats deckStats deckStats" "card_back card_back card_front card_front" ". sliders sliders .";
+  }
+
+  .header {
+    grid-area: header;
+    font-size: 2.5vw;
+    text-align: center;
+    place-self: center;
+  }
+
+  .card_back {
+    grid-area: card_back;
+    place-self: center;
+  }
+
+  .card_front {
+    place-self: center;
+    grid-area: card_front;
+  }
+
+  .sliders {
+    grid-area: sliders;
+    place-self: center;
+  }
+
+  .countStats {
+    grid-area: countStats;
+    place-self: center;
+  }
+
+  .deckStats {
+    grid-area: deckStats;
+    place-self: center;
+  }
+}
+
+@media only screen and (max-width: 620px) {
+  .game-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 10% 20% 35% 20%;
+    gap: 1px 1px;
+    grid-template-areas: "header header header header" "countStats countStats deckStats deckStats" "card_back card_back card_front card_front" "sliders sliders sliders sliders";
+  }
+
+  .header {
+    grid-area: header;
+    text-align: center;
+    place-self: center;
+  }
+
+  .card_back {
+    grid-area: card_back;
+    place-self: center;
+    margin-bottom: 10px;
+  }
+
+  .card_front {
+    place-self: center;
+    grid-area: card_front;
+    margin-bottom: 10px;
+  }
+
+  .sliders {
+    grid-area: sliders;
+    place-self: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .countStats {
+    grid-area: countStats;
+    place-self: stretch;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .deckStats {
+    grid-area: deckStats;
+    place-self: stretch;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
   }
 }

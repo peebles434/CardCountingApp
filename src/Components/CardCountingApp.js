@@ -6,6 +6,7 @@ import { CardCounter } from "./CardCounter";
 import { ModeSelector } from "./ModeSelector";
 import { CardFront } from "./CardFront";
 import { CardBack } from "./CardBack";
+import { AnswerInputForm } from "./AnswerInputForm";
 import { shuffle } from "../Logic/CardCountingAppLogic";
 import { Link } from "@material-ui/core";
 import "../App.css";
@@ -112,14 +113,19 @@ export const CardCountingApp = observer(() => {
       <div className="sliders">
         <ModeSelector updateNumberOfDecks={updateNumberOfDecks} />
       </div>
-      <div className="stats">
-        <CardCounter
+      <div className="countStats">
+        <AnswerInputForm
           answerMode={answerMode}
           setAnswerMode={setAnswerMode}
-          resetDeck={resetDeck}
-          setUpdatedRunningCount={setUpdatedRunningCount}
         />
       </div>
+      <br />
+      <CardCounter
+        answerMode={answerMode}
+        setAnswerMode={setAnswerMode}
+        resetDeck={resetDeck}
+        setUpdatedRunningCount={setUpdatedRunningCount}
+      />
       <div className="card_back">
         <CardBack drawFromDeck={drawFromDeck} />
       </div>
