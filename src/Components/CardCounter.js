@@ -72,7 +72,7 @@ export const CardCounter = ({
       </p>
       <p className="hideCounts" onClick={toggleTrueCount}>
         Click <b>here</b> to see true count for testing purposes:{" "}
-        {trueCountTesting ? trueCount : ""}
+        {trueCountTesting ? (isNaN(trueCount) ? 0 : trueCount) : ""}
       </p>
     </div>
   );

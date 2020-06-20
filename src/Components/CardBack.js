@@ -26,7 +26,7 @@ export const CardBack = observer(({ drawFromDeck, count, deck }) => {
   // AutoDealing Function - uses timerDuration in CardBackLogic.js to set interval speed
   useEffect(() => {
     let interval = null;
-    if (isActive) {
+    if (isActive && count < deck.length) {
       interval = setInterval(() => {
         drawFromDeck();
         setAutoCount(autoCount + 1);
@@ -38,17 +38,16 @@ export const CardBack = observer(({ drawFromDeck, count, deck }) => {
   }, [isActive, autoCount, drawFromDeck]);
 
   // TODO: Should Stop autodealer randomly based on CardBackLogic.js (10-40 by default)
-  // TODO: Need to hook up to randomDealerStop from Logic folder
   useEffect(() => {
     setDealerStopPoint(randomDealerStop());
   }, []);
 
-  useEffect(() => {
-    console.log(autoCount + " - " + dealerStopPoint);
-    if (autoCount === dealerStopPoint) {
-      setIsActive(!isActive);
-    }
-  }, [autoCount]);
+  // useEffect(() => {
+  //   console.log(autoCount + " - " + dealerStopPoint);
+  //   if (autoCount === dealerStopPoint) {
+  //     setIsActive(!isActive);
+  //   }
+  // }, [autoCount]);
 
   return (
     <div>
