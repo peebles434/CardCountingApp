@@ -16,11 +16,11 @@ export const CardCountingApp = observer(() => {
     face: "0",
     image: null,
   });
-  const [deck, setDeck] = useState([]);
   const [answerMode, setAnswerMode] = useState({
     checkAnswerMode: false,
     correctAnswer: false,
   });
+
   // TODO: See why runningCount <p> tags lag behind unless set up with this useState.
   const [updatedRunningCount, setUpdatedRunningCount] = useState(0);
 
@@ -33,11 +33,17 @@ export const CardCountingApp = observer(() => {
     setUserAnswer,
     userTrueCountAnswer,
     setUserTrueCountAnswer,
+    deck,
+    setDeck,
   } = useStore();
+
+  const [deckForReset, setDeckForReset] = useState();
 
   // Shuffles 1 deck on initialization
   useEffect(() => {
-    setDeck(shuffle(importedCardData));
+    let newDeck = shuffle(importedCardData);
+    setDeck(newDeck);
+    setDeckForReset(newDeck);
   }, []);
 
   // Changes the number of decks and shuffles them all. Number passed in from slider in ModeSelector
@@ -51,6 +57,7 @@ export const CardCountingApp = observer(() => {
       }
     }
     setDeck(newDeck);
+    setDeckForReset(newDeck);
   };
 
   // Increases count which displays new card. Function called in CardDisplay's onClick
@@ -77,7 +84,7 @@ export const CardCountingApp = observer(() => {
       face: "0",
       image: null,
     });
-    setDeck(shuffle(deck));
+    setDeck(shuffle(deckForReset));
     setAnswerMode({
       checkAnswerMode: false,
       correctAnswer: false,
@@ -104,28 +111,22 @@ export const CardCountingApp = observer(() => {
         </Link>
       </div>
       <div className="sliders">
-        <ModeSelector count={count} updateNumberOfDecks={updateNumberOfDecks} />
+        <ModeSelector updateNumberOfDecks={updateNumberOfDecks} />
       </div>
       <div className="stats">
         <CardCounter
           chosenCard={chosenCard}
           answerMode={answerMode}
           setAnswerMode={setAnswerMode}
-          deck={deck}
           resetDeck={resetDeck}
           setUpdatedRunningCount={setUpdatedRunningCount}
         />
       </div>
       <div className="card_back">
-        <CardBack
-          drawFromDeck={drawFromDeck}
-          count={count}
-          chosenCard={chosenCard}
-          deck={deck}
-        />
+        <CardBack drawFromDeck={drawFromDeck} chosenCard={chosenCard} />
       </div>
       <div className="card_front">
-        <CardFront count={count} chosenCard={chosenCard} />
+        <CardFront chosenCard={chosenCard} />
       </div>
     </div>
   );

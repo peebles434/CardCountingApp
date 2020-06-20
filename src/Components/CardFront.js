@@ -1,6 +1,8 @@
 import React from "react";
+import { useStore } from "../Stores/rootStore";
 
-export const CardFront = ({ count, chosenCard }) => {
+export const CardFront = ({ chosenCard }) => {
+  const { count } = useStore();
   return (
     <div>
       {count < 0 ? null : (

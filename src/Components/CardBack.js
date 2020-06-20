@@ -4,9 +4,9 @@ import { back } from "../utils/cardPics";
 import { useStore } from "../Stores/rootStore";
 import { timerDuration, randomDealerStop } from "../Logic/CardBackLogic";
 
-export const CardBack = observer(({ drawFromDeck, count, deck }) => {
+export const CardBack = observer(({ drawFromDeck }) => {
   // Imported dealermode info from mobX
-  const { viewDealerMode, viewDealerDifficulty } = useStore();
+  const { viewDealerMode, viewDealerDifficulty, deck, count } = useStore();
 
   // States used by autodealer interval
   const [isActive, setIsActive] = useState(false);

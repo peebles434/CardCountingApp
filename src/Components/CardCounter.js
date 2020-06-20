@@ -8,7 +8,6 @@ export const CardCounter = ({
   chosenCard,
   answerMode,
   setAnswerMode,
-  deck,
   resetDeck,
   setUpdatedRunningCount,
 }) => {
@@ -18,6 +17,7 @@ export const CardCounter = ({
     setRunningCount,
     trueCount,
     setTrueCount,
+    deck,
   } = useStore();
 
   const [runningCountTesting, setRunningCountTesting] = useState(false);
