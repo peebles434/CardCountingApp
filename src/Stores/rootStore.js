@@ -27,6 +27,12 @@ const RootStore = types
     get updatedRunningCount() {
       return self.runningCount;
     },
+    get viewDealerMode() {
+      return self.dealerMode;
+    },
+    get viewDealerDifficulty() {
+      return self.dealerDifficulty;
+    },
   }))
   .actions((self) => ({
     setCount(value) {

@@ -1,11 +1,19 @@
 import React, { useEffect, useState } from "react";
+import { observer } from "mobx-react";
 import { back } from "../utils/cardPics";
+import { useStore } from "../Stores/rootStore";
+import { timerDuration } from "../Logic/CardBackLogic";
 
-export const CardBack = ({ drawFromDeck, count, deck }) => {
+export const CardBack = observer(({ drawFromDeck, count, deck }) => {
+  const { viewDealerMode, viewDealerDifficulty } = useStore();
+
   const [isActive, setIsActive] = useState(false);
   const [autoCount, setAutoCount] = useState(0);
 
   const clickHandler = () => {
+    if (!isActive) {
+      drawFromDeck();
+    }
     setIsActive(!isActive);
   };
 
@@ -15,7 +23,7 @@ export const CardBack = ({ drawFromDeck, count, deck }) => {
       interval = setInterval(() => {
         drawFromDeck();
         setAutoCount(autoCount + 1);
-      }, 1000);
+      }, timerDuration(viewDealerDifficulty));
     } else if (!isActive) {
       clearInterval(interval);
     }
@@ -26,16 +34,15 @@ export const CardBack = ({ drawFromDeck, count, deck }) => {
     <div>
       {count <= deck.length - 1 ? (
         <div>
-          <button onClick={clickHandler}>click</button>
           <img
             className="cardBack noselect"
             src={back}
             alt=""
-            onClick={drawFromDeck}
+            onClick={viewDealerMode === "click" ? drawFromDeck : clickHandler}
             draggable={false}
           />
         </div>
       ) : null}
     </div>
   );
-};
+});
