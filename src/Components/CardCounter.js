@@ -5,7 +5,6 @@ import { Button } from "@material-ui/core";
 import "../App.css";
 
 export const CardCounter = ({
-  chosenCard,
   answerMode,
   setAnswerMode,
   resetDeck,
@@ -18,6 +17,8 @@ export const CardCounter = ({
     trueCount,
     setTrueCount,
     deck,
+    suit,
+    face,
   } = useStore();
 
   const [runningCountTesting, setRunningCountTesting] = useState(false);
@@ -33,18 +34,20 @@ export const CardCounter = ({
 
   // Checks the chosen card and determines if it is a low card, medium card, or high card
   useEffect(() => {
-    const lowCards = /^(2|3|4|5|6)$/;
-    const highCards = /^(10|J|Q|K|A)$/;
-    if (chosenCard.face.match(lowCards)) {
-      setRunningCount(runningCount + 1);
-      setTrueCount(Math.round((runningCount + 1) / roundDecksToTheQuarter()));
-      setUpdatedRunningCount(runningCount + 1);
-    } else if (chosenCard.face.match(highCards)) {
-      setRunningCount(runningCount - 1);
-      setTrueCount(Math.round((runningCount - 1) / roundDecksToTheQuarter()));
-      setUpdatedRunningCount(runningCount - 1);
+    if (face) {
+      const lowCards = /^(2|3|4|5|6)$/;
+      const highCards = /^(10|J|Q|K|A)$/;
+      if (face.match(lowCards)) {
+        setRunningCount(runningCount + 1);
+        setTrueCount(Math.round((runningCount + 1) / roundDecksToTheQuarter()));
+        setUpdatedRunningCount(runningCount + 1);
+      } else if (face.match(highCards)) {
+        setRunningCount(runningCount - 1);
+        setTrueCount(Math.round((runningCount - 1) / roundDecksToTheQuarter()));
+        setUpdatedRunningCount(runningCount - 1);
+      }
     }
-  }, [chosenCard.face, chosenCard.suit]);
+  }, [face, suit]);
 
   // Finds decks remaining and rounds it UP to the nearest .25
   const roundDecksToTheQuarter = () => {

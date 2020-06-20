@@ -11,11 +11,6 @@ import { Link } from "@material-ui/core";
 import "../App.css";
 
 export const CardCountingApp = observer(() => {
-  const [chosenCard, setChosenCard] = useState({
-    suit: null,
-    face: "0",
-    image: null,
-  });
   const [answerMode, setAnswerMode] = useState({
     checkAnswerMode: false,
     correctAnswer: false,
@@ -35,6 +30,10 @@ export const CardCountingApp = observer(() => {
     setUserTrueCountAnswer,
     deck,
     setDeck,
+    suit,
+    face,
+    image,
+    setChosenCard,
   } = useStore();
 
   const [deckForReset, setDeckForReset] = useState();
@@ -115,7 +114,6 @@ export const CardCountingApp = observer(() => {
       </div>
       <div className="stats">
         <CardCounter
-          chosenCard={chosenCard}
           answerMode={answerMode}
           setAnswerMode={setAnswerMode}
           resetDeck={resetDeck}
@@ -123,10 +121,10 @@ export const CardCountingApp = observer(() => {
         />
       </div>
       <div className="card_back">
-        <CardBack drawFromDeck={drawFromDeck} chosenCard={chosenCard} />
+        <CardBack drawFromDeck={drawFromDeck} />
       </div>
       <div className="card_front">
-        <CardFront chosenCard={chosenCard} />
+        <CardFront />
       </div>
     </div>
   );

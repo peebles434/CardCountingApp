@@ -12,7 +12,7 @@ const RootStore = types
     userAnswer: types.string,
     userTrueCountAnswer: types.string,
     suit: types.maybeNull(types.string),
-    face: types.number,
+    face: types.maybeNull(types.string),
     image: types.maybeNull(types.string),
     checkAnswerMode: types.boolean,
     correctAnswer: types.boolean,

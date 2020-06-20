@@ -6,7 +6,7 @@ export const DefaultGameStore = {
   userAnswer: "",
   userTrueCountAnswer: "",
   suit: null,
-  face: 0,
+  face: null,
   image: null,
   checkAnswerMode: false,
   correctAnswer: false,
