@@ -23,7 +23,7 @@ img {
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 10% 20% 35% 20%;
   gap: 1px 1px;
-  grid-template-areas: "header header header header" ". countStats deckStats ." ". card_back card_front ." ". sliders sliders .";
+  grid-template-areas: "header header header header" ". countStats deckStats ." ". card_back card_front ." "sliders sliders sliders sliders";
 }
 
 .header {
@@ -52,6 +52,10 @@ img {
 .sliders {
   grid-area: sliders;
   place-self: center;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 30px;
 }
 
 .countStats {
@@ -119,6 +123,7 @@ img {
   .card_back {
     grid-area: card_back;
     place-self: center;
+    margin-bottom: 15px;
   }
 
   .card_front {
@@ -129,6 +134,7 @@ img {
   .sliders {
     grid-area: sliders;
     place-self: center;
+    margin-top: 10px;
   }
 
   .countStats {
@@ -159,12 +165,12 @@ img {
 
   .card_back {
     grid-area: card_back;
-    place-self: center;
-    margin-bottom: 10px;
+    place-self: stretch;
+    margin-bottom: 15px;
   }
 
   .card_front {
-    place-self: center;
+    place-self: stretch;
     grid-area: card_front;
     margin-bottom: 10px;
   }
@@ -172,10 +178,11 @@ img {
   .sliders {
     grid-area: sliders;
     place-self: center;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
     margin-left: auto;
     margin-right: auto;
+    font-size: 15px;
   }
 
   .countStats {
