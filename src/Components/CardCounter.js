@@ -10,7 +10,6 @@ export const CardCounter = ({
   setAnswerMode,
   deck,
   resetDeck,
-  updatedRunningCount,
   setUpdatedRunningCount,
 }) => {
   const {

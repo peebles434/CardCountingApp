@@ -7,7 +7,7 @@ import { ModeSelector } from "./ModeSelector";
 import { CardFront } from "./CardFront";
 import { CardBack } from "./CardBack";
 import { shuffle } from "../Logic/CardCountingAppLogic";
-import { Button, Link } from "@material-ui/core";
+import { Link } from "@material-ui/core";
 import "../App.css";
 
 export const CardCountingApp = observer(() => {
@@ -113,7 +113,6 @@ export const CardCountingApp = observer(() => {
           setAnswerMode={setAnswerMode}
           deck={deck}
           resetDeck={resetDeck}
-          updatedRunningCount={updatedRunningCount}
           setUpdatedRunningCount={setUpdatedRunningCount}
         />
       </div>
