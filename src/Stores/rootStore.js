@@ -50,6 +50,18 @@ const RootStore = types
     setUserTrueCountAnswer(value) {
       self.userTrueCountAnswer = value;
     },
+    setChosenCard(value) {
+      self.suit = value.suit;
+      self.face = value.face;
+      self.image = value.image;
+    },
+    setAnswerMode(value) {
+      self.checkAnswerMode = value.checkAnswerMode;
+      self.correctAnswer = value.correctAnswer;
+    },
+    setDeck(value) {
+      self.deck = value;
+    },
   }))
   .actions((self) => ({
     updateGameMode(x) {
@@ -69,19 +81,21 @@ const RootStore = types
       }
     },
   }))
-
-  // TODO: Needs to be updated, doesn't connect correctly
   .actions((self) => ({
-    setDeck(value) {
-      self.deck = value;
-    },
-    setChosenCard(value) {
-      self.suit = value.suit;
-      self.face = value.face;
-      self.image = value.image;
+    // Increases count which displays new card. Function called in CardDisplay's onClick
+    drawFromDeck() {
+      self.count = self.count + 1;
+      self.suit = self.deck[self.count].suit;
+      self.face = self.deck[self.count].face;
+      self.image = self.deck[self.count].image;
+      if (self.checkAnswerMode === true) {
+        self.checkAnswerMode = false;
+        self.correctAnswer = false;
+      }
+      self.userAnswer = "";
+      self.userTrueCountAnswer = "";
     },
   }));
-
 let _store;
 export const useStore = () => {
   const store = useMemo(() => {

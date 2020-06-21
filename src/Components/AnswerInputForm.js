@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import { useStore } from '../Stores/rootStore';
+import React from "react";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import { useStore } from "../Stores/rootStore";
 
-export const AnswerInputForm = ({ answerMode, setAnswerMode }) => {
+export const AnswerInputForm = () => {
   const {
     count,
     runningCount,
@@ -12,6 +12,9 @@ export const AnswerInputForm = ({ answerMode, setAnswerMode }) => {
     setUserAnswer,
     userTrueCountAnswer,
     setUserTrueCountAnswer,
+    checkAnswerMode,
+    correctAnswer,
+    setAnswerMode,
   } = useStore();
 
   const onAnswerChange = (e) => {
@@ -51,7 +54,7 @@ export const AnswerInputForm = ({ answerMode, setAnswerMode }) => {
         <TextField
           id="standard-basic"
           label="Running Count?"
-          value={userAnswer || ''}
+          value={userAnswer || ""}
           onChange={onAnswerChange}
           autoComplete="off"
           disabled={count === 0 ? true : false}
@@ -65,7 +68,7 @@ export const AnswerInputForm = ({ answerMode, setAnswerMode }) => {
         <TextField
           id="standard-basic"
           label="True Count?"
-          value={userTrueCountAnswer || ''}
+          value={userTrueCountAnswer || ""}
           onChange={onTrueCountAnswerChange}
           autoComplete="off"
           disabled={count === 0 ? true : false}
@@ -84,13 +87,13 @@ export const AnswerInputForm = ({ answerMode, setAnswerMode }) => {
         </Button>
       </form>
       <div>
-        {answerMode.checkAnswerMode && answerMode.correctAnswer ? (
+        {checkAnswerMode && correctAnswer ? (
           <>
             <p>Good Job!</p>
             <p>Click the deck to keep playing!</p>
           </>
         ) : null}
-        {answerMode.checkAnswerMode && !answerMode.correctAnswer ? (
+        {checkAnswerMode && !correctAnswer ? (
           <>
             <p>Incorrect!</p>
 

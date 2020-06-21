@@ -1,7 +1,8 @@
 import React from "react";
+import { observer } from "mobx-react";
 import { useStore } from "../Stores/rootStore";
 
-export const CardFront = () => {
+export const CardFront = observer(() => {
   const { count, image } = useStore();
   return (
     <div>
@@ -17,4 +18,4 @@ export const CardFront = () => {
       )}
     </div>
   );
-};
+});

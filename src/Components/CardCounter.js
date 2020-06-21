@@ -55,11 +55,11 @@ export const CardCounter = ({ resetDeck, setUpdatedRunningCount }) => {
       <h2>Decks Remaining: {roundDecksToTheQuarter()} </h2>
       <br />
       <p className="hideCounts" onClick={toggleRunningCount}>
-        Click <b>here</b> to see running count for testing purposes:{" "}
+        Click <b>here</b> to see running count for testing:{" "}
         {runningCountTesting ? runningCount : ""}
       </p>
       <p className="hideCounts" onClick={toggleTrueCount}>
-        Click <b>here</b> to see true count for testing purposes:{" "}
+        Click <b>here</b> to see true count for testing:{" "}
         {trueCountTesting ? (isNaN(trueCount) ? 0 : trueCount) : ""}
       </p>
       <br />
