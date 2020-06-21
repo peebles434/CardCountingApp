@@ -35,7 +35,7 @@ export const modeSliderMarks = [
   },
   {
     value: 3,
-    label: "Auto-Medium",
+    label: "Auto-Med",
   },
   {
     value: 4,

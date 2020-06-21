@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useInterval } from "react";
 import { observer } from "mobx-react";
 import { useStore } from "../Stores/rootStore";
 import { importedCardData } from "../utils/importedCardData";
@@ -6,48 +6,21 @@ import { CardCounter } from "./CardCounter";
 import { ModeSelector } from "./ModeSelector";
 import { CardFront } from "./CardFront";
 import { CardBack } from "./CardBack";
-import { Button, Link } from "@material-ui/core";
+import { AnswerInputForm } from "./AnswerInputForm";
+import { shuffle } from "../Logic/CardCountingAppLogic";
+import { Link } from "@material-ui/core";
 import "../App.css";
 
 export const CardCountingApp = observer(() => {
-  const [chosenCard, setChosenCard] = useState({
-    suit: null,
-    face: "0",
-    image: null,
-  });
-  const [deck, setDeck] = useState([]);
-  const [answerMode, setAnswerMode] = useState({
-    checkAnswerMode: false,
-    correctAnswer: false,
-  });
-  // TODO: See why runningCount <p> tags lag behind unless set up with this useState.
-  const [updatedRunningCount, setUpdatedRunningCount] = useState(0);
+  const { count, userAnswer, userTrueCountAnswer, setDeck } = useStore();
 
-  const {
-    count,
-    setCount,
-    setRunningCount,
-    setTrueCount,
-    userAnswer,
-    setUserAnswer,
-    userTrueCountAnswer,
-    setUserTrueCountAnswer,
-  } = useStore();
-
-  function shuffle(a) {
-    var j, x, i;
-    for (i = a.length - 1; i > 0; i--) {
-      j = Math.floor(Math.random() * (i + 1));
-      x = a[i];
-      a[i] = a[j];
-      a[j] = x;
-    }
-    return a;
-  }
+  const [deckForReset, setDeckForReset] = useState();
 
   // Shuffles 1 deck on initialization
   useEffect(() => {
-    setDeck(shuffle(importedCardData));
+    let newDeck = shuffle(importedCardData);
+    setDeck(newDeck);
+    setDeckForReset(newDeck);
   }, []);
 
   // Changes the number of decks and shuffles them all. Number passed in from slider in ModeSelector
@@ -61,51 +34,8 @@ export const CardCountingApp = observer(() => {
       }
     }
     setDeck(newDeck);
+    setDeckForReset(newDeck);
   };
-
-  // TODO: Need to wire up updateGameMode. Will change between clicking the deck and automatic dealing. Mode passed in from slider in ModeSelector
-  const updateGameMode = (x) => {
-    console.log(x);
-  };
-
-  // Increases count which displays new card. Function called in CardDisplay's onClick
-  const drawFromDeck = () => {
-    setCount(count + 1);
-    setChosenCard(deck[count]);
-    if (answerMode.checkAnswerMode === true) {
-      setAnswerMode({
-        checkAnswerMode: false,
-        correctAnswer: false,
-      });
-      setUserAnswer("");
-      setUserTrueCountAnswer("");
-    }
-  };
-
-  // Starts game over on Reset button's onClick
-  const resetDeck = () => {
-    setCount(0);
-    setRunningCount(0);
-    setTrueCount(0);
-    setChosenCard({
-      suit: null,
-      face: "0",
-      image: null,
-    });
-    setDeck(shuffle(deck));
-    setAnswerMode({
-      checkAnswerMode: false,
-      correctAnswer: false,
-    });
-    setUserAnswer("");
-    setUserTrueCountAnswer("");
-    setUpdatedRunningCount(0);
-  };
-
-  //   useInterval(() => {
-  //     setCount(count + 1);
-  //     setChosenCard(deck[count]);
-  //   }, 2000);
 
   return (
     <div className="game-container">
@@ -124,33 +54,18 @@ export const CardCountingApp = observer(() => {
         </Link>
       </div>
       <div className="sliders">
-        <ModeSelector
-          count={count}
-          updateNumberOfDecks={updateNumberOfDecks}
-          updateGameMode={updateGameMode}
-        />
+        <ModeSelector updateNumberOfDecks={updateNumberOfDecks} />
       </div>
-      <div className="stats">
-        <CardCounter
-          chosenCard={chosenCard}
-          answerMode={answerMode}
-          setAnswerMode={setAnswerMode}
-          deck={deck}
-          resetDeck={resetDeck}
-          updatedRunningCount={updatedRunningCount}
-          setUpdatedRunningCount={setUpdatedRunningCount}
-        />
+      <div className="countStats">
+        <AnswerInputForm />
       </div>
+      <br />
+      <CardCounter deckForReset={deckForReset} />
       <div className="card_back">
-        <CardBack
-          drawFromDeck={drawFromDeck}
-          count={count}
-          chosenCard={chosenCard}
-          deck={deck}
-        />
+        <CardBack />
       </div>
       <div className="card_front">
-        <CardFront count={count} chosenCard={chosenCard} />
+        <CardFront />
       </div>
     </div>
   );
