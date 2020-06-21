@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { observer } from "mobx-react";
 import { useStore } from "../Stores/rootStore";
+import { shuffle } from "../Logic/CardCountingAppLogic";
 import { Button } from "@material-ui/core";
 import "../App.css";
 
-export const CardCounter = ({ resetDeck, setUpdatedRunningCount }) => {
+export const CardCounter = observer(({ deckForReset }) => {
   const {
     count,
     runningCount,
@@ -13,6 +15,7 @@ export const CardCounter = ({ resetDeck, setUpdatedRunningCount }) => {
     deck,
     suit,
     face,
+    resetDeck,
   } = useStore();
 
   const [runningCountTesting, setRunningCountTesting] = useState(false);
@@ -34,11 +37,9 @@ export const CardCounter = ({ resetDeck, setUpdatedRunningCount }) => {
       if (face.match(lowCards)) {
         setRunningCount(runningCount + 1);
         setTrueCount(Math.round((runningCount + 1) / roundDecksToTheQuarter()));
-        setUpdatedRunningCount(runningCount + 1);
       } else if (face.match(highCards)) {
         setRunningCount(runningCount - 1);
         setTrueCount(Math.round((runningCount - 1) / roundDecksToTheQuarter()));
-        setUpdatedRunningCount(runningCount - 1);
       }
     }
   }, [face, suit]);
@@ -48,6 +49,10 @@ export const CardCounter = ({ resetDeck, setUpdatedRunningCount }) => {
     let decksRemaining = deck.length / 52 - count / 52;
     let roundedDecksRemaining = Math.ceil(decksRemaining / 0.25) * 0.25;
     return roundedDecksRemaining;
+  };
+
+  const clickHandler = () => {
+    resetDeck(deckForReset, shuffle);
   };
 
   return (
@@ -65,11 +70,11 @@ export const CardCounter = ({ resetDeck, setUpdatedRunningCount }) => {
       <br />
       <Button
         variant="outlined"
-        onClick={resetDeck}
+        onClick={clickHandler}
         disabled={count > 0 ? false : true}
       >
         Reset Deck
       </Button>
     </div>
   );
-};
+});

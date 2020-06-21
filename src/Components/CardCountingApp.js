@@ -12,25 +12,7 @@ import { Link } from "@material-ui/core";
 import "../App.css";
 
 export const CardCountingApp = observer(() => {
-  // TODO: See why runningCount <p> tags lag behind unless set up with this useState.
-  const [updatedRunningCount, setUpdatedRunningCount] = useState(0);
-
-  const {
-    count,
-    setCount,
-    setRunningCount,
-    setTrueCount,
-    userAnswer,
-    setUserAnswer,
-    userTrueCountAnswer,
-    setUserTrueCountAnswer,
-    deck,
-    setDeck,
-    setChosenCard,
-    setAnswerMode,
-    checkAnswerMode,
-    correctAnswer,
-  } = useStore();
+  const { count, userAnswer, userTrueCountAnswer, setDeck } = useStore();
 
   const [deckForReset, setDeckForReset] = useState();
 
@@ -53,26 +35,6 @@ export const CardCountingApp = observer(() => {
     }
     setDeck(newDeck);
     setDeckForReset(newDeck);
-  };
-
-  // Starts game over on Reset button's onClick
-  const resetDeck = () => {
-    setCount(0);
-    setRunningCount(0);
-    setTrueCount(0);
-    setChosenCard({
-      suit: null,
-      face: "0",
-      image: null,
-    });
-    setDeck(shuffle(deckForReset));
-    setAnswerMode({
-      checkAnswerMode: false,
-      correctAnswer: false,
-    });
-    setUserAnswer("");
-    setUserTrueCountAnswer("");
-    setUpdatedRunningCount(0);
   };
 
   return (
@@ -98,10 +60,7 @@ export const CardCountingApp = observer(() => {
         <AnswerInputForm />
       </div>
       <br />
-      <CardCounter
-        resetDeck={resetDeck}
-        setUpdatedRunningCount={setUpdatedRunningCount}
-      />
+      <CardCounter deckForReset={deckForReset} />
       <div className="card_back">
         <CardBack />
       </div>

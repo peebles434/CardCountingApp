@@ -23,17 +23,7 @@ const RootStore = types
   .volatile((self) => ({
     answerDraft: {},
   }))
-  .views((self) => ({
-    get updatedRunningCount() {
-      return self.runningCount;
-    },
-    get viewDealerMode() {
-      return self.dealerMode;
-    },
-    get viewDealerDifficulty() {
-      return self.dealerDifficulty;
-    },
-  }))
+  .views((self) => ({}))
   .actions((self) => ({
     setCount(value) {
       self.count = value;
@@ -64,6 +54,7 @@ const RootStore = types
     },
   }))
   .actions((self) => ({
+    // Provides different game modes based on slider mark values
     updateGameMode(x) {
       if (x === 1) {
         self.dealerMode = "click";
@@ -95,7 +86,22 @@ const RootStore = types
       self.userAnswer = "";
       self.userTrueCountAnswer = "";
     },
+    // Starts game over on Reset button's onClick
+    resetDeck(deckForReset, shuffle) {
+      self.count = 0;
+      self.runningCount = 0;
+      self.trueCount = 0;
+      self.suit = null;
+      self.face = "0";
+      self.image = null;
+      self.deck = shuffle(deckForReset);
+      self.checkAnswerMode = false;
+      self.correctAnswer = false;
+      self.userAnswer = "";
+      self.userTrueCountAnswer = "";
+    },
   }));
+
 let _store;
 export const useStore = () => {
   const store = useMemo(() => {
