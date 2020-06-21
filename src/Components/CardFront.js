@@ -1,13 +1,16 @@
 import React from "react";
+import { observer } from "mobx-react";
+import { useStore } from "../Stores/rootStore";
 
-export const CardFront = ({ count, chosenCard }) => {
+export const CardFront = observer(() => {
+  const { count, image } = useStore();
   return (
     <div>
       {count < 0 ? null : (
         <div>
           <img
             className="cardFront noselect"
-            src={chosenCard.image}
+            src={image}
             alt=""
             draggable={false}
           />
@@ -15,4 +18,4 @@ export const CardFront = ({ count, chosenCard }) => {
       )}
     </div>
   );
-};
+});

@@ -1,24 +1,21 @@
 import React, { useEffect, useState } from "react";
+import { observer } from "mobx-react";
 import { useStore } from "../Stores/rootStore";
-import { AnswerInputForm } from "./AnswerInputForm";
+import { shuffle } from "../Logic/CardCountingAppLogic";
 import { Button } from "@material-ui/core";
 import "../App.css";
 
-export const CardCounter = ({
-  chosenCard,
-  answerMode,
-  setAnswerMode,
-  deck,
-  resetDeck,
-  updatedRunningCount,
-  setUpdatedRunningCount,
-}) => {
+export const CardCounter = observer(({ deckForReset }) => {
   const {
     count,
     runningCount,
     setRunningCount,
     trueCount,
     setTrueCount,
+    deck,
+    suit,
+    face,
+    resetDeck,
   } = useStore();
 
   const [runningCountTesting, setRunningCountTesting] = useState(false);
@@ -34,18 +31,18 @@ export const CardCounter = ({
 
   // Checks the chosen card and determines if it is a low card, medium card, or high card
   useEffect(() => {
-    const lowCards = /^(2|3|4|5|6)$/;
-    const highCards = /^(10|J|Q|K|A)$/;
-    if (chosenCard.face.match(lowCards)) {
-      setRunningCount(runningCount + 1);
-      setTrueCount(Math.round((runningCount + 1) / roundDecksToTheQuarter()));
-      setUpdatedRunningCount(runningCount + 1);
-    } else if (chosenCard.face.match(highCards)) {
-      setRunningCount(runningCount - 1);
-      setTrueCount(Math.round((runningCount - 1) / roundDecksToTheQuarter()));
-      setUpdatedRunningCount(runningCount - 1);
+    if (face) {
+      const lowCards = /^(2|3|4|5|6)$/;
+      const highCards = /^(10|J|Q|K|A)$/;
+      if (face.match(lowCards)) {
+        setRunningCount(runningCount + 1);
+        setTrueCount(Math.round((runningCount + 1) / roundDecksToTheQuarter()));
+      } else if (face.match(highCards)) {
+        setRunningCount(runningCount - 1);
+        setTrueCount(Math.round((runningCount - 1) / roundDecksToTheQuarter()));
+      }
     }
-  }, [chosenCard.face, chosenCard.suit]);
+  }, [face, suit]);
 
   // Finds decks remaining and rounds it UP to the nearest .25
   const roundDecksToTheQuarter = () => {
@@ -54,26 +51,30 @@ export const CardCounter = ({
     return roundedDecksRemaining;
   };
 
+  const clickHandler = () => {
+    resetDeck(deckForReset, shuffle);
+  };
+
   return (
-    <div>
-      <AnswerInputForm answerMode={answerMode} setAnswerMode={setAnswerMode} />
+    <div className="deckStats">
+      <h2>Decks Remaining: {roundDecksToTheQuarter()} </h2>
+      <br />
+      <p className="hideCounts" onClick={toggleRunningCount}>
+        Click <b>here</b> to see running count for testing:{" "}
+        {runningCountTesting ? runningCount : ""}
+      </p>
+      <p className="hideCounts" onClick={toggleTrueCount}>
+        Click <b>here</b> to see true count for testing:{" "}
+        {trueCountTesting ? (isNaN(trueCount) ? 0 : trueCount) : ""}
+      </p>
       <br />
       <Button
         variant="outlined"
-        onClick={resetDeck}
+        onClick={clickHandler}
         disabled={count > 0 ? false : true}
       >
         Reset Deck
       </Button>
-      <h2>Decks Remaining: {roundDecksToTheQuarter()} </h2>
-      <p className="hideCounts" onClick={toggleRunningCount}>
-        Click <b>here</b> to see running count for testing purposes:{" "}
-        {runningCountTesting ? runningCount : ""}
-      </p>
-      <p className="hideCounts" onClick={toggleTrueCount}>
-        Click <b>here</b> to see true count for testing purposes:{" "}
-        {trueCountTesting ? trueCount : ""}
-      </p>
     </div>
   );
-};
+});
