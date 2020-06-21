@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { observer } from "mobx-react";
 import { useStore } from "../Stores/rootStore";
-import { AnswerInputForm } from "./AnswerInputForm";
+import { shuffle } from "../Logic/CardCountingAppLogic";
 import { Button } from "@material-ui/core";
 import "../App.css";
 
-export const CardCounter = ({
-  answerMode,
-  setAnswerMode,
-  resetDeck,
-  setUpdatedRunningCount,
-}) => {
+export const CardCounter = observer(({ deckForReset }) => {
   const {
     count,
     runningCount,
@@ -19,6 +15,7 @@ export const CardCounter = ({
     deck,
     suit,
     face,
+    resetDeck,
   } = useStore();
 
   const [runningCountTesting, setRunningCountTesting] = useState(false);
@@ -40,11 +37,9 @@ export const CardCounter = ({
       if (face.match(lowCards)) {
         setRunningCount(runningCount + 1);
         setTrueCount(Math.round((runningCount + 1) / roundDecksToTheQuarter()));
-        setUpdatedRunningCount(runningCount + 1);
       } else if (face.match(highCards)) {
         setRunningCount(runningCount - 1);
         setTrueCount(Math.round((runningCount - 1) / roundDecksToTheQuarter()));
-        setUpdatedRunningCount(runningCount - 1);
       }
     }
   }, [face, suit]);
@@ -56,26 +51,30 @@ export const CardCounter = ({
     return roundedDecksRemaining;
   };
 
+  const clickHandler = () => {
+    resetDeck(deckForReset, shuffle);
+  };
+
   return (
-    <div>
-      <AnswerInputForm answerMode={answerMode} setAnswerMode={setAnswerMode} />
+    <div className="deckStats">
+      <h2>Decks Remaining: {roundDecksToTheQuarter()} </h2>
+      <br />
+      <p className="hideCounts" onClick={toggleRunningCount}>
+        Click <b>here</b> to see running count for testing:{" "}
+        {runningCountTesting ? runningCount : ""}
+      </p>
+      <p className="hideCounts" onClick={toggleTrueCount}>
+        Click <b>here</b> to see true count for testing:{" "}
+        {trueCountTesting ? (isNaN(trueCount) ? 0 : trueCount) : ""}
+      </p>
       <br />
       <Button
         variant="outlined"
-        onClick={resetDeck}
+        onClick={clickHandler}
         disabled={count > 0 ? false : true}
       >
         Reset Deck
       </Button>
-      <h2>Decks Remaining: {roundDecksToTheQuarter()} </h2>
-      <p className="hideCounts" onClick={toggleRunningCount}>
-        Click <b>here</b> to see running count for testing purposes:{" "}
-        {runningCountTesting ? runningCount : ""}
-      </p>
-      <p className="hideCounts" onClick={toggleTrueCount}>
-        Click <b>here</b> to see true count for testing purposes:{" "}
-        {trueCountTesting ? (isNaN(trueCount) ? 0 : trueCount) : ""}
-      </p>
     </div>
   );
-};
+});

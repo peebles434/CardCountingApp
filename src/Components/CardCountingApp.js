@@ -6,35 +6,13 @@ import { CardCounter } from "./CardCounter";
 import { ModeSelector } from "./ModeSelector";
 import { CardFront } from "./CardFront";
 import { CardBack } from "./CardBack";
+import { AnswerInputForm } from "./AnswerInputForm";
 import { shuffle } from "../Logic/CardCountingAppLogic";
 import { Link } from "@material-ui/core";
 import "../App.css";
 
 export const CardCountingApp = observer(() => {
-  const [answerMode, setAnswerMode] = useState({
-    checkAnswerMode: false,
-    correctAnswer: false,
-  });
-
-  // TODO: See why runningCount <p> tags lag behind unless set up with this useState.
-  const [updatedRunningCount, setUpdatedRunningCount] = useState(0);
-
-  const {
-    count,
-    setCount,
-    setRunningCount,
-    setTrueCount,
-    userAnswer,
-    setUserAnswer,
-    userTrueCountAnswer,
-    setUserTrueCountAnswer,
-    deck,
-    setDeck,
-    suit,
-    face,
-    image,
-    setChosenCard,
-  } = useStore();
+  const { count, userAnswer, userTrueCountAnswer, setDeck } = useStore();
 
   const [deckForReset, setDeckForReset] = useState();
 
@@ -59,40 +37,6 @@ export const CardCountingApp = observer(() => {
     setDeckForReset(newDeck);
   };
 
-  // Increases count which displays new card. Function called in CardDisplay's onClick
-  const drawFromDeck = () => {
-    setCount(count + 1);
-    setChosenCard(deck[count]);
-    if (answerMode.checkAnswerMode === true) {
-      setAnswerMode({
-        checkAnswerMode: false,
-        correctAnswer: false,
-      });
-      setUserAnswer("");
-      setUserTrueCountAnswer("");
-    }
-  };
-
-  // Starts game over on Reset button's onClick
-  const resetDeck = () => {
-    setCount(0);
-    setRunningCount(0);
-    setTrueCount(0);
-    setChosenCard({
-      suit: null,
-      face: "0",
-      image: null,
-    });
-    setDeck(shuffle(deckForReset));
-    setAnswerMode({
-      checkAnswerMode: false,
-      correctAnswer: false,
-    });
-    setUserAnswer("");
-    setUserTrueCountAnswer("");
-    setUpdatedRunningCount(0);
-  };
-
   return (
     <div className="game-container">
       <div className="header">
@@ -112,16 +56,13 @@ export const CardCountingApp = observer(() => {
       <div className="sliders">
         <ModeSelector updateNumberOfDecks={updateNumberOfDecks} />
       </div>
-      <div className="stats">
-        <CardCounter
-          answerMode={answerMode}
-          setAnswerMode={setAnswerMode}
-          resetDeck={resetDeck}
-          setUpdatedRunningCount={setUpdatedRunningCount}
-        />
+      <div className="countStats">
+        <AnswerInputForm />
       </div>
+      <br />
+      <CardCounter deckForReset={deckForReset} />
       <div className="card_back">
-        <CardBack drawFromDeck={drawFromDeck} />
+        <CardBack />
       </div>
       <div className="card_front">
         <CardFront />

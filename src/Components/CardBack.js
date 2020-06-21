@@ -4,9 +4,16 @@ import { back } from "../utils/cardPics";
 import { useStore } from "../Stores/rootStore";
 import { timerDuration, randomDealerStop } from "../Logic/CardBackLogic";
 
-export const CardBack = observer(({ drawFromDeck }) => {
+export const CardBack = observer(() => {
   // Imported dealermode info from mobX
-  const { viewDealerMode, viewDealerDifficulty, deck, count } = useStore();
+  const {
+    dealerMode,
+    dealerDifficulty,
+    deck,
+    count,
+    drawFromDeck,
+    suit,
+  } = useStore();
 
   // States used by autodealer interval
   const [isActive, setIsActive] = useState(false);
@@ -23,6 +30,13 @@ export const CardBack = observer(({ drawFromDeck }) => {
     setIsActive(!isActive);
   };
 
+  // If suit is set to null by "Reset Deck" btn, it will deactivate the auto dealer
+  useEffect(() => {
+    if (suit === null) {
+      setIsActive(false);
+    }
+  }, [suit]);
+
   // AutoDealing Function - uses timerDuration in CardBackLogic.js to set interval speed
   useEffect(() => {
     let interval = null;
@@ -30,7 +44,7 @@ export const CardBack = observer(({ drawFromDeck }) => {
       interval = setInterval(() => {
         drawFromDeck();
         setAutoCount(autoCount + 1);
-      }, timerDuration(viewDealerDifficulty));
+      }, timerDuration(dealerDifficulty));
     } else if (!isActive) {
       clearInterval(interval);
     }
@@ -57,7 +71,7 @@ export const CardBack = observer(({ drawFromDeck }) => {
             className="cardBack noselect"
             src={back}
             alt=""
-            onClick={viewDealerMode === "click" ? drawFromDeck : clickHandler}
+            onClick={dealerMode === "click" ? drawFromDeck : clickHandler}
             draggable={false}
           />
         </div>

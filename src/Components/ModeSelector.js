@@ -6,7 +6,7 @@ import Slider from "@material-ui/core/Slider";
 import { modeSliderMarks, deckSliderMarks } from "../utils/sliderMarks";
 
 export const ModeSelector = observer(({ updateNumberOfDecks }) => {
-  const { count, updateGameMode, viewDealerMode } = useStore();
+  const { count, updateGameMode, dealerMode } = useStore();
 
   const [deckSliderValue, setDeckSliderValue] = useState(1);
   const [modeSliderValue, setModeSliderValue] = useState(1);
@@ -67,7 +67,7 @@ export const ModeSelector = observer(({ updateNumberOfDecks }) => {
         max={4}
         disabled={count > 0 ? true : false}
       />
-      {viewDealerMode === "auto" ? (
+      {dealerMode === "auto" ? (
         <>
           <p>Click deck to start automatic dealer.</p>
           <p>Dealer will stop randomly.</p>
