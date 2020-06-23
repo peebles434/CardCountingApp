@@ -1,9 +1,10 @@
 import React from "react";
+import { observer } from "mobx-react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import { useStore } from "../Stores/rootStore";
 
-export const AnswerInputForm = () => {
+export const AnswerInputForm = observer(() => {
   const {
     count,
     runningCount,
@@ -105,4 +106,4 @@ export const AnswerInputForm = () => {
       </div>
     </div>
   );
-};
+});
