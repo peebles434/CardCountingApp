@@ -1,9 +1,1 @@
-<!-- TODO: -->
-
-2: Auto Dealer
-3: Break out Play Mode:
-
-> Deal speed
-> Answer count frequency
-> 4: User stats in localStorage/Database
-> 5: Style overhaul (material UI)
+Powered with React using MobX-state-tree for state management. A card counting application that keeps track of both running and true count values while incorporating how many decks the user decides to play.
