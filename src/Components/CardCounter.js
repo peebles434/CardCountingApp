@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react";
-import { useStore } from "../Stores/rootStore";
+import { RootStore } from "../Stores/rootStore";
 import { shuffle } from "../Logic/CardCountingAppLogic";
 import { Button } from "@material-ui/core";
 import "../App.css";
@@ -13,10 +13,9 @@ export const CardCounter = observer(({ deckForReset }) => {
     trueCount,
     setTrueCount,
     deck,
-    suit,
-    face,
+    chosenCard,
     resetDeck,
-  } = useStore();
+  } = RootStore;
 
   const [runningCountTesting, setRunningCountTesting] = useState(false);
   const [trueCountTesting, setTrueCountTesting] = useState(false);
@@ -29,20 +28,26 @@ export const CardCounter = observer(({ deckForReset }) => {
     setTrueCountTesting(!trueCountTesting);
   };
 
+  console.log(chosenCard);
+
   // Checks the chosen card and determines if it is a low card, medium card, or high card
   useEffect(() => {
-    if (face) {
+    if (chosenCard && chosenCard.face) {
       const lowCards = /^(2|3|4|5|6)$/;
       const highCards = /^(10|J|Q|K|A)$/;
-      if (face.match(lowCards)) {
+      if (chosenCard.face.match(lowCards)) {
         setRunningCount(runningCount + 1);
         setTrueCount(Math.round((runningCount + 1) / roundDecksToTheQuarter()));
-      } else if (face.match(highCards)) {
+      } else if (chosenCard.face.match(highCards)) {
         setRunningCount(runningCount - 1);
         setTrueCount(Math.round((runningCount - 1) / roundDecksToTheQuarter()));
       }
     }
-  }, [face, suit]);
+  }, [chosenCard]);
+
+  if (!chosenCard) return null;
+
+  console.log(chosenCard.toJSON());
 
   // Finds decks remaining and rounds it UP to the nearest .25
   const roundDecksToTheQuarter = () => {

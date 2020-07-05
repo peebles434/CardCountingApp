@@ -2,7 +2,7 @@ import React from "react";
 import { observer } from "mobx-react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import { useStore } from "../Stores/rootStore";
+import { RootStore } from "../Stores/rootStore";
 
 export const AnswerInputForm = observer(() => {
   const {
@@ -16,7 +16,7 @@ export const AnswerInputForm = observer(() => {
     checkAnswerMode,
     correctAnswer,
     setAnswerMode,
-  } = useStore();
+  } = RootStore;
 
   const onAnswerChange = (e) => {
     setUserAnswer(e.currentTarget.value);

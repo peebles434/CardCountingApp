@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react";
 import { back } from "../utils/cardPics";
-import { useStore } from "../Stores/rootStore";
+import { RootStore } from "../Stores/rootStore";
 import { timerDuration, randomDealerStop } from "../Logic/CardBackLogic";
 
 export const CardBack = observer(() => {
@@ -13,7 +13,7 @@ export const CardBack = observer(() => {
     count,
     drawFromDeck,
     suit,
-  } = useStore();
+  } = RootStore;
 
   // States used by autodealer interval
   const [isActive, setIsActive] = useState(false);

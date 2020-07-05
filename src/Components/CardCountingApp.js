@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useInterval } from "react";
 import { observer } from "mobx-react";
-import { useStore } from "../Stores/rootStore";
+import { RootStore } from "../Stores/rootStore";
 import { importedCardData } from "../utils/importedCardData";
 import { CardCounter } from "./CardCounter";
 import { ModeSelector } from "./ModeSelector";
@@ -12,13 +12,17 @@ import { Link } from "@material-ui/core";
 import "../App.css";
 
 export const CardCountingApp = observer(() => {
-  const { count, userAnswer, userTrueCountAnswer, setDeck } = useStore();
+  const { count, userAnswer, userTrueCountAnswer, setDeck } = RootStore;
 
   const [deckForReset, setDeckForReset] = useState();
 
   // Shuffles 1 deck on initialization
   useEffect(() => {
-    let newDeck = shuffle(importedCardData);
+    const idWithCards = importedCardData.map((card, index) => ({
+      id: index.toString(),
+      ...card,
+    }));
+    let newDeck = shuffle(idWithCards);
     setDeck(newDeck);
     setDeckForReset(newDeck);
   }, []);

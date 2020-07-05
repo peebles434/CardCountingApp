@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react";
-import { useStore } from "../Stores/rootStore";
+import { RootStore } from "../Stores/rootStore";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 import { modeSliderMarks, deckSliderMarks } from "../utils/sliderMarks";
 
 export const ModeSelector = observer(({ updateNumberOfDecks }) => {
-  const { count, updateGameMode, dealerMode } = useStore();
+  const { count, updateGameMode, dealerMode } = RootStore;
 
   const [deckSliderValue, setDeckSliderValue] = useState(1);
   const [modeSliderValue, setModeSliderValue] = useState(1);
